@@ -1,12 +1,13 @@
-# Terraform to create AWS lambda
+# Terraform to create AWS Lambda
 
 This Terraform module creates the zip file and uploads an AWS Lambda function
 
-**Note:** IAM role creation are not covered.
+**Usage** 
 
-**Usage**
+- Recommend using https://github.com/tomarv2/tfremote
 
-Recommend using https://github.com/tomarv2/tfremote
+- IAM role creation are not covered.
+
 
 ## Inputs
 
