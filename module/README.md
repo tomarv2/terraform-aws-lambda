@@ -1,12 +1,18 @@
-# Terraform to create AWS lambda
+## Terraform module to create AWS Lambda
 
-This Terraform module creates the zip file and uploads an AWS Lambda function
+## Requirements
 
-**Note:** IAM role creation are not covered.
+| Name | Version |
+|------|---------|
+| terraform | >= 0.14 |
+| aws | ~> 2.61 |
 
-**Usage**
+## Providers
 
-Recommend using https://github.com/tomarv2/tfremote
+| Name | Version |
+|------|---------|
+| archive | n/a |
+| aws | ~> 2.61 |
 
 ## Inputs
 
@@ -17,7 +23,7 @@ Recommend using https://github.com/tomarv2/tfremote
 | aws\_region | n/a | `string` | `"us-west-2"` | no |
 | description | (Optional) Description of what your Lambda Function does. | `string` | `""` | no |
 | email | email address to be used for tagging (suggestion: use group email address) | `any` | n/a | yes |
-| environment\_vars | n/a | `map` | <pre>{<br>  "NO_ADDITIONAL_BUILD_VARS": "TRUE"<br>}</pre> | no |
+| environment\_vars | n/a | `map` | `{}` | no |
 | handler | (Required) The function entrypoint in your code. | `any` | n/a | yes |
 | memory\_size | (Optional) Amount of memory in MB your Lambda Function can use at runtime. Defaults to 128. | `number` | `128` | no |
 | output\_file\_path | n/a | `any` | n/a | yes |
