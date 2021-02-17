@@ -62,10 +62,15 @@ variable "performance_mode" {
   default     = "generalPurpose"
 }
 
-variable "source_file" {}
+variable "source_file" {
+  description = "source of the file to zip"
+}
 
-variable "output_file_path" {}
+variable "output_file_path" {
+  description = "location of the output zip file"
+}
 
 variable "archive_type" {
   default = "zip"
+  description = "type of file"
 }
