@@ -15,4 +15,7 @@ resource "aws_lambda_function" "lambda" {
   environment {
     variables                   = var.environment_vars
   }
+  tracing_config {
+    mode = "PassThrough"
+  }
 }
