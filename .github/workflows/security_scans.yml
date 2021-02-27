@@ -12,6 +12,9 @@ on:
       - '**.md'
   pull_request:
     paths-ignore:
+      - 'README.md'
+      - 'LICENSE'
+      - '.gitignore'
       - '**.md'
 
 jobs:
@@ -20,7 +23,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
 
       - name: Security Scan
         id: Bridgecrew
@@ -29,4 +32,6 @@ jobs:
           api-key: ${{ secrets.BRIDGECREW_API_KEY }}
           directory: "."
           soft_fail: false
+          # BC: "check_name": "X-ray tracing is enabled for Lambda" - disabled
+          skip_check: CKV_AWS_50
           output_format: json

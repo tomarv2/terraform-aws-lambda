@@ -2,6 +2,6 @@
 # do not edit or delete!
 
 terraform {
-	backend "s3" {
-	}
+  backend "s3" {
+  }
 }

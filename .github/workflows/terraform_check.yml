@@ -1,0 +1,55 @@
+name: Terraform checks
+
+on:
+  push:
+    branches:
+      - "feature/*"
+      - "github-actions"
+      - "develop"
+    paths-ignore:
+      - 'README.md'
+      - 'LICENSE'
+      - '.gitignore'
+      - '**.md'
+  pull_request:
+    paths-ignore:
+      - 'README.md'
+      - 'LICENSE'
+      - '.gitignore'
+      - '**.md'
+
+jobs:
+  check-terraform:
+    name: Terraform checks
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: 0.14.7
+
+      - name: Terraform fmt
+        id: fmt
+        continue-on-error: true
+        run: |
+          cd .
+          terraform fmt -recursive
+
+      - name: Commit files
+        run: |
+          pwd
+          touch test
+          echo "hello" > test
+          git add -A .
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git commit -m "Add changes"
+
+      - name: Pull requests
+        uses: vsoch/pull-request-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PULL_REQUEST_BRANCH: "main"
+          PULL_REQUEST_FROM_BRANCH: ${{ github.ref }}

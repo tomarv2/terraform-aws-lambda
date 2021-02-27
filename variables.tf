@@ -30,29 +30,29 @@ variable "handler" {
 }
 
 variable "runtime" {
-  default = ""
+  default     = ""
   description = "(Required) See Runtimes for valid values."
 }
 
 variable "environment_vars" {
-  type = map
+  type = map(any)
   default = {
-      "NO_ADDITIONAL_BUILD_VARS" = "TRUE"
+    "NO_ADDITIONAL_BUILD_VARS" = "TRUE"
   }
 }
 
 variable "memory_size" {
-  default = 128
+  default     = 128
   description = "(Optional) Amount of memory in MB your Lambda Function can use at runtime. Defaults to 128."
 }
 
 variable "timeout" {
-  default = 30
+  default     = 30
   description = "(Optional) The amount of time your Lambda Function has to run in seconds. Defaults to 3."
 }
 
 variable "description" {
-  default = ""
+  default     = ""
   description = "(Optional) Description of what your Lambda Function does."
 }
 

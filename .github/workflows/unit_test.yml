@@ -12,6 +12,9 @@ on:
       - '**.md'
   pull_request:
     paths-ignore:
+      - 'README.md'
+      - 'LICENSE'
+      - '.gitignore'
       - '**.md'
 
 jobs:
@@ -20,7 +23,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
 
       - uses: actions/setup-go@v1
         with:
@@ -40,10 +43,6 @@ jobs:
           mkdir ~/.ssh
           echo "${{ secrets.SSH_GITHUB }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-
-      # Checks that all Terraform configuration files adhere to a canonical format
-      - name: Terraform Format
-        run: terraform fmt -check
 
 #      - name: Run Go Tests
 #        working-directory: tests
