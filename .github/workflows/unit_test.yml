@@ -4,11 +4,21 @@ on:
   push:
     branches:
       - main
+      - develop
+    paths-ignore:
+      - 'README.md'
+      - 'LICENSE'
+      - '.gitignore'
+      - '**.md'
+  pull_request:
+    paths-ignore:
+      - '**.md'
 
 jobs:
   go-tests:
-    name: Run Go Unit Tests
+    name: Unit Tests
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v1
 
@@ -24,23 +34,26 @@ jobs:
         working-directory: tests
         run: go mod download
 
-#      - name: Security Scan
-#        id: Bridgecrew
-#        uses: bridgecrewio/bridgecrew-action@master
-#        with:
-#          api-key: ${{ secrets.BRIDGECREW_API_KEY }}
-
-      - name: Run Go Tests
+      - name: Set ssh keys for github remote download
         working-directory: tests
         run: |
-          go test -v
-        env:
-          # TF ENVIRONMENT
-          TF_AWS_BUCKET: "${{ secrets.TF_NONPROD_AWS_BUCKET }}"
-          TF_AWS_PROFILE: "${{ secrets.TF_AWS_PROFILE }}"
-          TF_AWS_BUCKET_REGION: "${{ secrets.TF_AWS_BUCKET_REGION }}"
-          # AWS CREDENTIALS
-          AWS_ACCESS_KEY_ID: "${{ secrets.DEV_AWS_ACCESS_KEY_ID }}"
-          AWS_SECRET_ACCESS_KEY: "${{ secrets.DEV_AWS_SECRET_ACCESS_KEY }}"
-          AWS_SESSION_TOKEN: "${{ secrets.AWS_SESSION_TOKEN }}"
-          AWS_SECURITY_TOKEN: "${{ secrets.AWS_SECURITY_TOKEN }}"
+          mkdir ~/.ssh
+          echo "${{ secrets.SSH_GITHUB }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+
+      # Checks that all Terraform configuration files adhere to a canonical format
+      - name: Terraform Format
+        run: terraform fmt -check
+
+#      - name: Run Go Tests
+#        working-directory: tests
+#        run: |
+#          go test -v
+#        env:
+#          # TF ENVIRONMENT
+#          TF_AWS_BUCKET: "${{ secrets.TF_NONPROD_AWS_BUCKET }}"
+#          TF_AWS_PROFILE: "${{ secrets.TF_AWS_PROFILE }}"
+#          TF_AWS_BUCKET_REGION: "${{ secrets.TF_AWS_BUCKET_REGION }}"
+#          # AWS CREDENTIALS
+#          AWS_ACCESS_KEY_ID: "${{ secrets.DEV_AWS_ACCESS_KEY_ID }}"
+#          AWS_SECRET_ACCESS_KEY: "${{ secrets.DEV_AWS_SECRET_ACCESS_KEY }}"

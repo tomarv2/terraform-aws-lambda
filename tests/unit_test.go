@@ -46,6 +46,7 @@ func TestTerraformAwsLambdaExample(t *testing.T) {
 	// This function just echos it's input as a JSON string when `ShouldFail` is `false``
 	assert.Equal(t, `"hi!"`, string(response))
 
+    // TODO: need to spend sometime here
 	// Invoke the function, this time causing it to error and capturing the error
 	//response, err := aws.InvokeFunctionE(t, awsRegion, functionName, ExampleFunctionPayload{ShouldFail: true, Echo: "hi!"})
 
