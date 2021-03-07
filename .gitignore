@@ -80,5 +80,4 @@ _testmain.go
 /test/times.out
 
 # ignore requried vars file
-#**/test_data
-**/test_data/*.tfvars
+**test**

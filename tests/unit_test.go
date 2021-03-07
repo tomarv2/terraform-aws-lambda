@@ -15,9 +15,9 @@ import (
 func TestTerraformAwsLambdaExample(t *testing.T) {
 	t.Parallel()
 	// ----------------------------------------------------------
-	TF_VARS_FILE_PATH       := "../test_data/test.tfvars"
-	TF_REPO_PATH            := "../example/base"
-	functionName            := "rumse-demo-lambda"
+	TF_VARS_FILE_PATH       := "test.tfvars"
+	TF_REPO_PATH            := "../example"
+	functionName            := "security-demo-lambda"
 	awsRegion               := aws.GetRandomStableRegion(t, nil, nil)
     // --------------------------------------------------------
 	// Construct the terraform options with default retryable errors to handle the most common retryable errors in

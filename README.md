@@ -17,23 +17,6 @@
 
 ## Terraform module to create AWS Lambda
 
-### Security & Compliance: [BridgeCrew](https://bridgecrew.io/)
-
-Bridgecrew is the leading fully hosted, cloud-native solution providing continuous Terraform security and compliance.
-
-| Benchmark | Description |
-|--------|---------------|
-| [![General](https://www.bridgecrew.cloud/badges/github/tomarv2/terraform-aws-lambda/general)](https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=tomarv2%2Fterraform-aws-lambda&benchmark=INFRASTRUCTURE+SECURITY) | Infrastructure Security Compliance |
-| [![cis-k8s](https://www.bridgecrew.cloud/badges/github/tomarv2/terraform-aws-lambda/cis_kubernetes)](https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=tomarv2%2Fterraform-aws-lambda&benchmark=CIS+KUBERNETES+V1.5)| Center for Internet Security, KUBERNETES Compliance |
-| [![cis-aws](https://www.bridgecrew.cloud/badges/github/tomarv2/terraform-aws-lambda/cis_aws)](https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=tomarv2%2Fterraform-aws-lambda&benchmark=CIS+AWS+V1.2) | Center for Internet Security, AWS Compliance |
-| [![cis-azure](https://www.bridgecrew.cloud/badges/github/tomarv2/terraform-aws-lambda/cis_azure)](https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=tomarv2%2Fterraform-aws-lambda&benchmark=CIS+AZURE+V1.1) | Center for Internet Security, AZURE Compliance |
-| [![pci](https://www.bridgecrew.cloud/badges/github/tomarv2/terraform-aws-lambda/pci)](https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=tomarv2%2Fterraform-aws-lambda&benchmark=PCI-DSS+V3.2) | Payment Card Industry Data Security Standards Compliance |
-| [![nist](https://www.bridgecrew.cloud/badges/github/tomarv2/terraform-aws-lambda/nist)](https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=tomarv2%2Fterraform-aws-lambda&benchmark=NIST-800-53) | National Institute of Standards and Technology Compliance |
-| [![iso](https://www.bridgecrew.cloud/badges/github/tomarv2/terraform-aws-lambda/iso)](https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=tomarv2%2Fterraform-aws-lambda&benchmark=ISO27001) | Information Security Management System, ISO/IEC 27001 Compliance |
-| [![soc2](https://www.bridgecrew.cloud/badges/github/tomarv2/terraform-aws-lambda/soc2)](https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=tomarv2%2Fterraform-aws-lambda&benchmark=SOC2)| Service Organization Control 2 Compliance |
-| [![cis-gcp](https://www.bridgecrew.cloud/badges/github/tomarv2/terraform-aws-lambda/cis_gcp)](https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=tomarv2%2Fterraform-aws-lambda&benchmark=CIS+GCP+V1.1) | Center for Internet Security, GCP Compliance |
-| [![hipaa](https://www.bridgecrew.cloud/badges/github/tomarv2/terraform-aws-lambda/hipaa)](https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=tomarv2%2Fterraform-aws-lambda&benchmark=HIPAA) | Health Insurance Portability and Accountability Compliance |
-
 ## Versions
 
 - Module tested for Terraform 0.14.
@@ -72,13 +55,8 @@ export PATH=$PATH:/usr/local/bin/
 
 - Update:
 ```
-example/custom/sample.tfvars
+examples/main.tf
 ```
-
-- Change to: 
-```
-example/base
-``` 
 
 - Run and verify the output before deploying:
 ```
@@ -95,7 +73,7 @@ tf -cloud aws apply -var-file <path to .tfvars file>
 tf -cloud aws destroy -var-file <path to .tfvars file>
 ```
 
-Please refer to example directory [link](example) for references.
+Please refer to examples directory [link](examples) for references.
 
 ## Inputs
 

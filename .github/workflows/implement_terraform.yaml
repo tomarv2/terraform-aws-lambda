@@ -18,58 +18,83 @@ on:
       - '**.md'
 
 jobs:
-  terraform:
-    name: Terraform checks and apply
+  implement-terraform:
     runs-on: ubuntu-latest
     strategy:
       matrix:
         python-version: [3.8]
 
+    # Use Bash shell
+    defaults:
+      run:
+        shell: bash
+
     steps:
-      - uses: actions/checkout@v2
+    # Checkout the repository on the GitHub Actions runner
+    - name: Checkout
+      uses: actions/checkout@v2
 
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v2
-        with:
-          python-version: ${{ matrix.python-version }}
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
 
-      - uses: hashicorp/setup-terraform@v1
-        with:
-          terraform_version: 0.14.7
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install tfremote
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-      - name: Terraform fmt
-        working-directory: ops/aws-iam-test
-        id: fmt
-        continue-on-error: true
-        run: |
-          terraform fmt -recursive
+    # Install the latest version of Terraform CLI
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v1
 
-      - name: Terraform Init
-        id: init
-        run: terraform init
+    # Checks that all Terraform configuration files adhere to canonical format
+    - name: Terraform Format
+      run: terraform fmt -recursive #-check
 
-     - name: Terraform Plan
-       id: plan
-       run: terraform plan -no-color
-       continue-on-error: true
-       working-directory: ops/aws-iam
-       env:
-         # AWS CREDENTIALS
-         AWS_ACCESS_KEY_ID: "${{ secrets.AWS_ACCESS_KEY_ID }}"
-         AWS_SECRET_ACCESS_KEY: "${{ secrets.AWS_SECRET_ACCESS_KEY }}"
+    # Generate execution plan
+    - name: Terraform Plan
+      working-directory: examples
+      run: |
+        tf -cloud aws plan -var='teamid=rumse' -var='prjid=demo'
+      env:
+        # AWS CREDENTIALS
+        AWS_ACCESS_KEY_ID: "${{ secrets.AWS_ACCESS_KEY_ID }}"
+        AWS_SECRET_ACCESS_KEY: "${{ secrets.AWS_SECRET_ACCESS_KEY }}"
 
-      - name: Commit files
-        run: |
-          git add -A .
-          git config --local user.email "terraform+github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          git commit -m "Add changes"
-          git push
+    # On push to main deploy Terraform configuration files
+    - name: Terraform Apply
+      working-directory: examples
+      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      run: |
+        tf -cloud gcloud apply -var='teamid=rumse' -var='prjid=demo' -auto-approve
+      env:
+        # AWS CREDENTIALS
+        AWS_ACCESS_KEY_ID: "${{ secrets.AWS_ACCESS_KEY_ID }}"
+        AWS_SECRET_ACCESS_KEY: "${{ secrets.AWS_SECRET_ACCESS_KEY }}"
+        AWS_SECURITY_TOKEN: "${{ secrets.AWS_SECRET_ACCESS_KEY }}"
+        AWS_SESSION_TOKEN: "${{ secrets.AWS_SECRET_ACCESS_KEY }}"
 
-      - name: Pull requests
-        uses: vsoch/pull-request-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PULL_REQUEST_BRANCH: "main"
-          PULL_REQUEST_FROM_BRANCH: ${{ github.ref }}
+    - name: Get current branch name
+      id: vars
+      run: |
+        echo ::set-output name=branch_name::${GITHUB_REF##*/}
+
+    - name: Commit files
+      run: |
+        git add -A .
+        git config --local user.email "terraform+github-actions[bot]@users.noreply.github.com"
+        git config --local user.name "github-actions[bot]"
+        git commit -m "Add changes"
+        git push
+
+    # Create a pull request from develop to master branch
+    - name: Pull requests
+      if: ${{ steps.vars.outputs.branch_name }} == 'develop'
+      uses: vsoch/pull-request-action@master
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        PULL_REQUEST_BRANCH: "main"
+        PULL_REQUEST_FROM_BRANCH: ${{ github.ref }}
 
