@@ -31,6 +31,8 @@ func TestTerraformAwsLambda(t *testing.T) {
 		// Variables to pass to our Terraform code using -var options
 		Vars: map[string]interface{}{
 			"aws_region": awsRegion,
+			"teamid": "security",
+			"prjid": "demo-lambda",
 		},
 	}
 
