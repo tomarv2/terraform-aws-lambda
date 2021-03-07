@@ -12,11 +12,11 @@ import (
 )
 
 // An example of how to test the Terraform module in examples/terraform-aws-lambda-example using Terratest.
-func TestTerraformAwsLambdaExample(t *testing.T) {
+func TestTerraformAwsLambda(t *testing.T) {
 	t.Parallel()
 	// ----------------------------------------------------------
 	TF_VARS_FILE_PATH       := "test.tfvars"
-	TF_REPO_PATH            := "../example"
+	TF_REPO_PATH            := "../examples"
 	functionName            := "security-demo-lambda"
 	awsRegion               := aws.GetRandomStableRegion(t, nil, nil)
     // --------------------------------------------------------
