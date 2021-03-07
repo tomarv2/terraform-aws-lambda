@@ -15,9 +15,11 @@ import (
 func TestTerraformAwsLambda(t *testing.T) {
 	t.Parallel()
 	// ----------------------------------------------------------
-	TF_VARS_FILE_PATH       := "test.tfvars"
+// 	TF_VARS_FILE_PATH       := "test.tfvars"
 	TF_REPO_PATH            := "../examples"
 	functionName            := "security-demo-lambda"
+	teamid                  := "security"
+	prjid                   := "demo-lambda"
 	awsRegion               := aws.GetRandomStableRegion(t, nil, nil)
     // --------------------------------------------------------
 	// Construct the terraform options with default retryable errors to handle the most common retryable errors in
@@ -25,14 +27,14 @@ func TestTerraformAwsLambda(t *testing.T) {
 	terraformOptions := &terraform.Options{
 		TerraformDir: TF_REPO_PATH,
 
-		// Variables to pass to our Terraform code using -var-file options
-		VarFiles: []string{TF_VARS_FILE_PATH},
+// 		// Variables to pass to our Terraform code using -var-file options
+// 		VarFiles: []string{TF_VARS_FILE_PATH},
 
 		// Variables to pass to our Terraform code using -var options
 		Vars: map[string]interface{}{
-			"aws_region": awsRegion,
-			"teamid": "security",
-			"prjid": "demo-lambda",
+		"aws_region": awsRegion,
+			"teamid": teamid,
+			"prjid": prjid,
 		},
 	}
 

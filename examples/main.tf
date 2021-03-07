@@ -4,12 +4,12 @@ module "lambda" {
   email          = "varun.tomar@databricks.com"
   profile_to_use = "default"
 account_id     = "755921336062"
-aws_region     = "us-west-2"
+aws_region     = var.aws_region
 role           = "arn:aws:iam::755921336062:role/S3-SecretsScanner-LambdaRole20200608213733829700000002"
 description    = "demo lambda deployment"
 runtime          = "python3.8"
 handler          = "lambda_function.lambda_handler"
-source_file      = "../test_data/lambda_function.py"
+source_file      = "lambda_function.py"
 output_file_path = "/tmp/test.zip"
 
   environment_vars = {
