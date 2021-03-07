@@ -1,11 +1,10 @@
-name: Terraform checks
+name: Implement Terraform
 
 on:
   push:
     branches:
-      - "feature/*"
-      - "github-actions"
-      - "develop"
+      - develop
+      - main
     paths-ignore:
       - 'README.md'
       - 'LICENSE'
@@ -19,33 +18,53 @@ on:
       - '**.md'
 
 jobs:
-  check-terraform:
-    name: Terraform checks
+  terraform:
+    name: Terraform checks and apply
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.8]
 
     steps:
       - uses: actions/checkout@v2
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
 
       - uses: hashicorp/setup-terraform@v1
         with:
           terraform_version: 0.14.7
 
       - name: Terraform fmt
+        working-directory: ops/aws-iam-test
         id: fmt
         continue-on-error: true
         run: |
-          cd .
           terraform fmt -recursive
+
+      - name: Terraform Init
+        id: init
+        run: terraform init
+
+     - name: Terraform Plan
+       id: plan
+       run: terraform plan -no-color
+       continue-on-error: true
+       working-directory: ops/aws-iam
+       env:
+         # AWS CREDENTIALS
+         AWS_ACCESS_KEY_ID: "${{ secrets.AWS_ACCESS_KEY_ID }}"
+         AWS_SECRET_ACCESS_KEY: "${{ secrets.AWS_SECRET_ACCESS_KEY }}"
 
       - name: Commit files
         run: |
-          pwd
-          touch test
-          echo "hello" > test
           git add -A .
-          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.email "terraform+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git commit -m "Add changes"
+          git push
 
       - name: Pull requests
         uses: vsoch/pull-request-action@master
@@ -53,3 +72,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PULL_REQUEST_BRANCH: "main"
           PULL_REQUEST_FROM_BRANCH: ${{ github.ref }}
+

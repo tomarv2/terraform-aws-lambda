@@ -3,8 +3,8 @@ name: Security Scans
 on:
   push:
     branches:
-      - main
       - develop
+      - main
     paths-ignore:
       - 'README.md'
       - 'LICENSE'
@@ -18,20 +18,16 @@ on:
       - '**.md'
 
 jobs:
-  go-tests:
+  scans:
     name: Security Scans
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v2
 
-      - name: Security Scan
-        id: Bridgecrew
-        uses: bridgecrewio/bridgecrew-action@master
+      - name: Checkov Scan
+        id: checkov
+        uses: bridgecrewio/checkov-action@master
         with:
-          api-key: ${{ secrets.BRIDGECREW_API_KEY }}
           directory: "."
-          soft_fail: false
-          # BC: "check_name": "X-ray tracing is enabled for Lambda" - disabled
-          skip_check: CKV_AWS_50
-          output_format: json
+          framework: terraform # optional: run only on a specific infrastructure {cloudformation,terraform,kubernetes,all}
+          output_format: json # optional: the output format, one of: cli, json, junitxml, github_failed_only
