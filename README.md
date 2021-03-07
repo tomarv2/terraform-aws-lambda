@@ -114,6 +114,20 @@ module "lambda" {
 
 Please refer to examples directory [link](examples) for references.
 
+## Requirements
+
+| Name | Version |
+|------|---------|
+| terraform | >= 0.14 |
+| aws | 3.29 |
+
+## Providers
+
+| Name | Version |
+|------|---------|
+| archive | n/a |
+| aws | 3.29 |
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
@@ -123,7 +137,7 @@ Please refer to examples directory [link](examples) for references.
 | aws\_region | n/a | `string` | `"us-west-2"` | no |
 | description | (Optional) Description of what your Lambda Function does. | `string` | `""` | no |
 | email | email address to be used for tagging (suggestion: use group email address) | `any` | n/a | yes |
-| environment\_vars | n/a | `map` | <pre>{<br>  "NO_ADDITIONAL_BUILD_VARS": "TRUE"<br>}</pre> | no |
+| environment\_vars | n/a | `map(any)` | <pre>{<br>  "NO_ADDITIONAL_BUILD_VARS": "TRUE"<br>}</pre> | no |
 | handler | (Required) The function entrypoint in your code. | `any` | n/a | yes |
 | memory\_size | (Optional) Amount of memory in MB your Lambda Function can use at runtime. Defaults to 128. | `number` | `128` | no |
 | output\_file\_path | n/a | `any` | n/a | yes |
@@ -145,4 +159,3 @@ Please refer to examples directory [link](examples) for references.
 | lambda\_role | IAM role used by Lambda function |
 | output\_file\_path | Output filepath location |
 | output\_file\_size | Output filepath size |
-
