@@ -73,6 +73,45 @@ tf -cloud aws apply -var-file <path to .tfvars file>
 tf -cloud aws destroy -var-file <path to .tfvars file>
 ```
 
+> ❗️ **Important** - Two variables are required for using `tf` package:
+>
+> - teamid
+> - prjid
+>
+> These variables are required to set backend path in the remote storage.
+> Variables can be defined using:
+>
+> - As `inline variables` e.g.: `-var='teamid=demo-team' -var='prjid=demo-project'`
+> - Inside `.tfvars` file e.g.: `-var-file=<tfvars file location> `
+>
+> For more information refer to [Terraform documentation](https://www.terraform.io/docs/language/values/variables.html)
+
+
+```
+module "lambda" {
+  source = "../"
+
+  email            = "demo@demo.com"
+  profile_to_use   = "default"
+  account_id       = "123456789012"
+  aws_region       = "us-west-2"
+  role             = "arn:aws:iam::123456789012:role/lambda-execution-role"
+  description      = "demo lambda deployment"
+  runtime          = "python3.8"
+  handler          = "lambda_function.lambda_handler"
+  source_file      = "lambda_function.py"
+  output_file_path = "/tmp/test.zip"
+
+  environment_vars = {
+    "HELLO" = "WORLD"
+  }
+  # ------------------------------------------------------------------
+  # Do not change the teamid, prjid once set.
+  teamid = var.teamid
+  prjid  = var.prjid
+}
+```
+
 Please refer to examples directory [link](examples) for references.
 
 ## Inputs

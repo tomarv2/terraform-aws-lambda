@@ -81,3 +81,4 @@ _testmain.go
 
 # ignore requried vars file
 **test**
+examples/main.tf
