@@ -128,12 +128,12 @@ Please refer to examples directory [link](examples) for references.
 | memory\_size | (Optional) Amount of memory in MB your Lambda Function can use at runtime. Defaults to 128. | `number` | `128` | no |
 | output\_file\_path | n/a | `any` | n/a | yes |
 | performance\_mode | (Optional) The performance mode of your file system. | `string` | `"generalPurpose"` | no |
-| prjid | (Required) Name of the project/stack e.g: mystack, nifieks, demoaci. Should not be changed after running 'tf apply' | `any` | n/a | yes |
+| prjid | (Required) name of the project/stack e.g: mystack, nifieks, demoaci. Should not be changed after running 'tf apply' | `any` | n/a | yes |
 | profile\_to\_use | Getting values from ~/.aws/credentials | `any` | n/a | yes |
 | role | (Required) IAM role attached to the Lambda Function. This governs both who / what can invoke your Lambda Function, as well as what resources our Lambda Function has access to. | `any` | n/a | yes |
 | runtime | (Required) See Runtimes for valid values. | `string` | `""` | no |
 | source\_file | n/a | `any` | n/a | yes |
-| teamid | (Required) Name of the team/group e.g. devops, dataengineering. Should not be changed after running 'tf apply' | `any` | n/a | yes |
+| teamid | (Required) name of the team/group e.g. devops, dataengineering. Should not be changed after running 'tf apply' | `any` | n/a | yes |
 | timeout | (Optional) The amount of time your Lambda Function has to run in seconds. Defaults to 3. | `number` | `30` | no |
 
 ## Outputs

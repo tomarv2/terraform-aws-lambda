@@ -17,8 +17,8 @@ func TestTerraformAwsLambda(t *testing.T) {
 	// ----------------------------------------------------------
 // 	TF_VARS_FILE_PATH       := "test.tfvars"
 	TF_REPO_PATH            := "../examples"
-	functionName            := "security-demo-lambda"
-	teamid                  := "security"
+	functionName            := "rumse-demo-lambda"
+	teamid                  := "rumse"
 	prjid                   := "demo-lambda"
 	awsRegion               := aws.GetRandomStableRegion(t, nil, nil)
     // --------------------------------------------------------
