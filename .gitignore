@@ -79,6 +79,5 @@ _testmain.go
 /test/run.out
 /test/times.out
 
-# ignore requried vars file
+# ignore test file(s)
 **test**
-examples/main.tf

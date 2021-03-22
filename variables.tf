@@ -13,6 +13,7 @@ variable "email" {
 
 variable "profile_to_use" {
   description = "Getting values from ~/.aws/credentials"
+  default = "default"
 }
 
 variable "account_id" {}
@@ -22,43 +23,42 @@ variable "aws_region" {
 }
 
 variable "role" {
-  description = "(Required) IAM role attached to the Lambda Function. This governs both who / what can invoke your Lambda Function, as well as what resources our Lambda Function has access to."
+  description = "IAM role attached to the Lambda Function. This governs both who / what can invoke your Lambda Function, as well as what resources our Lambda Function has access to."
 }
 
 variable "handler" {
-  description = "(Required) The function entrypoint in your code."
+  description = "The function entrypoint in your code."
 }
 
 variable "runtime" {
   default     = ""
-  description = "(Required) See Runtimes for valid values."
+  description = "See Runtimes for valid values."
 }
 
-variable "environment_vars" {
-  type = map(any)
-  default = {
-    "NO_ADDITIONAL_BUILD_VARS" = "TRUE"
-  }
+variable "environment" {
+  type = object({
+    variables = map(string)
+  })
+  default = null
 }
 
 variable "memory_size" {
   default     = 128
-  description = "(Optional) Amount of memory in MB your Lambda Function can use at runtime. Defaults to 128."
+  description = "Amount of memory in MB your Lambda Function can use at runtime. Defaults to 128."
 }
 
 variable "timeout" {
   default     = 30
-  description = "(Optional) The amount of time your Lambda Function has to run in seconds. Defaults to 3."
+  description = "The amount of time your Lambda Function has to run in seconds. Defaults to 3."
 }
 
 variable "description" {
   default     = ""
-  description = "(Optional) Description of what your Lambda Function does."
+  description = "Description of what your Lambda Function does."
 }
 
 variable "performance_mode" {
-  description = "(Optional) The performance mode of your file system."
-  type        = string
+  description = "The performance mode of your file system."
   default     = "generalPurpose"
 }
 
@@ -68,4 +68,38 @@ variable "output_file_path" {}
 
 variable "archive_type" {
   default = "zip"
+}
+
+variable "tracing_config" {
+  type = object({
+    mode = string
+  })
+  default = {
+    mode = "PassThrough"
+  }
+}
+
+variable "vpc_config" {
+  type = object({
+    security_group_ids = list(string)
+    subnet_ids         = list(string)
+  })
+  default = null
+}
+
+variable "dead_letter_config" {
+  type = object({
+    target_arn = string
+  })
+  default = null
+}
+
+variable "reserved_concurrent_executions" {
+  type    = number
+  default = null
+}
+
+variable "layers" {
+  type    = list(string)
+  default = null
 }
