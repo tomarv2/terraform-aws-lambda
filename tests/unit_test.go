@@ -54,12 +54,12 @@ func TestTerraformAwsLambda(t *testing.T) {
 	// Invoke the function, this time causing it to error and capturing the error
 	//response, err := aws.InvokeFunctionE(t, awsRegion, functionName, ExampleFunctionPayload{ShouldFail: true, Echo: "hi!"})
 
-// 	// Function-specific errors have their own special return
-// 	functionError, ok := err.(*aws.FunctionError)
-// 	require.True(t, ok)
-//
-// 	// Make sure the function-specific error comes back
-// 	assert.Contains(t, string(functionError.Payload), "Failed to handle")
+    // 	// Function-specific errors have their own special return
+    // 	functionError, ok := err.(*aws.FunctionError)
+    // 	require.True(t, ok)
+    //
+    // 	// Make sure the function-specific error comes back
+    // 	assert.Contains(t, string(functionError.Payload), "Failed to handle")
 }
 
 type ExampleFunctionPayload struct {

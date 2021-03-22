@@ -6,7 +6,3 @@ variable "teamid" {
 variable "prjid" {
   description = "(Required) name of the project/stack e.g: mystack, nifieks, demoaci. Should not be changed after running 'tf apply'"
 }
-
-variable "aws_region" {
-  default = "us-west-2"
-}

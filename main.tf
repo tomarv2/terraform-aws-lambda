@@ -1,7 +1,6 @@
 locals {
   shared_tags = map(
-    "name", "${var.teamid}-${var.prjid}",
-    "owner", var.email,
+    "Name", "${var.teamid}-${var.prjid}",
     "team", var.teamid,
     "project", var.prjid
   )
