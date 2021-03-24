@@ -51,10 +51,7 @@ export TF_AWS_BUCKET_REGION=us-west-2
 export PATH=$PATH:/usr/local/bin/
 ```  
 
-- Update:
-```
-examples/main.tf
-```
+- Make required change to `examples` directory.
 
 - Run and verify the output before deploying:
 ```
@@ -89,7 +86,6 @@ tf -cloud aws destroy -var='teamid=foo' -var='prjid=bar'
 module "lambda" {
   source = "../"
 
-  email            = "demo@demo.com"
   account_id       = "123456789012"
   role             = "arn:aws:iam::123456789012:role/LambdaExecutionRole"
   runtime          = "python3.8"
@@ -104,20 +100,19 @@ module "lambda" {
 ```
 
 Please refer to examples directory [link](examples) for references.
-
 ## Requirements
 
 | Name | Version |
 |------|---------|
 | terraform | >= 0.14 |
-| aws | 3.29 |
+| aws | ~> 3.29 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
 | archive | n/a |
-| aws | 3.29 |
+| aws | ~> 3.29 |
 
 ## Inputs
 
@@ -128,7 +123,6 @@ Please refer to examples directory [link](examples) for references.
 | aws\_region | n/a | `string` | `"us-west-2"` | no |
 | dead\_letter\_config | n/a | <pre>object({<br>    target_arn = string<br>  })</pre> | `null` | no |
 | description | Description of what your Lambda Function does. | `string` | `""` | no |
-| email | email address to be used for tagging (suggestion: use group email address) | `any` | n/a | yes |
 | environment | n/a | <pre>object({<br>    variables = map(string)<br>  })</pre> | `null` | no |
 | handler | The function entrypoint in your code. | `any` | n/a | yes |
 | layers | n/a | `list(string)` | `null` | no |
