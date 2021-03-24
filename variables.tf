@@ -7,10 +7,6 @@ variable "prjid" {
   description = "(Required) name of the project/stack e.g: mystack, nifieks, demoaci. Should not be changed after running 'tf apply'"
 }
 
-variable "email" {
-  description = "email address to be used for tagging (suggestion: use group email address)"
-}
-
 variable "profile_to_use" {
   description = "Getting values from ~/.aws/credentials"
   default = "default"
