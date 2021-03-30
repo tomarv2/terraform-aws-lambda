@@ -48,7 +48,6 @@ pip install tfremote
 export TF_AWS_BUCKET=<remote state bucket name>
 export TF_AWS_PROFILE=default
 export TF_AWS_BUCKET_REGION=us-west-2
-export PATH=$PATH:/usr/local/bin/
 ```  
 
 - Make required change to `examples` directory.
@@ -100,6 +99,7 @@ module "lambda" {
 ```
 
 Please refer to examples directory [link](examples) for references.
+
 ## Requirements
 
 | Name | Version |
