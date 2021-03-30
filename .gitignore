@@ -80,4 +80,7 @@ _testmain.go
 /test/times.out
 
 # ignore test file(s)
-test.tf
+**test**
+# Do not ignore files in .github (actions)
+!.github
+!.tests/*

@@ -9,7 +9,7 @@ variable "prjid" {
 
 variable "profile_to_use" {
   description = "Getting values from ~/.aws/credentials"
-  default = "default"
+  default     = "default"
 }
 
 variable "account_id" {}
@@ -20,6 +20,7 @@ variable "aws_region" {
 
 variable "role" {
   description = "IAM role attached to the Lambda Function. This governs both who / what can invoke your Lambda Function, as well as what resources our Lambda Function has access to."
+  default     = null
 }
 
 variable "handler" {
@@ -98,4 +99,81 @@ variable "reserved_concurrent_executions" {
 variable "layers" {
   type    = list(string)
   default = null
+}
+
+variable "cloudwatch_path" {
+  description = "name of the log group"
+  default     = "aws/lambda"
+}
+
+variable "deploy" {
+  description = "Controls whether resources should be created"
+  type        = bool
+  default     = true
+}
+
+variable "deploy_package" {
+  description = "Controls whether Lambda package should be created"
+  type        = bool
+  default     = true
+}
+
+variable "deploy_function" {
+  description = "Controls whether Lambda Function resource should be created"
+  type        = bool
+  default     = true
+}
+
+variable "deploy_layer" {
+  description = "Controls whether Lambda Layer resource should be created"
+  type        = bool
+  default     = false
+}
+
+variable "kms_key_arn" {
+  description = "The ARN of KMS key to use by your Lambda Function"
+  type        = string
+  default     = null
+}
+
+variable "package_type" {
+  description = "The Lambda deployment package type. Valid options: Zip or Image"
+  type        = string
+  default     = "Zip"
+}
+
+variable "image_uri" {
+  description = "The ECR image URI containing the function's deployment package."
+  type        = string
+  default     = null
+}
+
+variable "file_system_arn" {
+  description = "The Amazon Resource Name (ARN) of the Amazon EFS Access Point that provides access to the file system."
+  type        = string
+  default     = null
+}
+
+variable "file_system_local_mount_path" {
+  description = "The path where the function can access the file system, starting with /mnt/."
+  type        = string
+  default     = null
+}
+
+# Cloudwatch trigger
+variable "deploy_cloudwatch_event_trigger" {
+  type    = bool
+  default = false
+}
+
+variable "source_arn" {
+  default = null
+}
+
+variable "profile_to_use_for_iam" {
+  default = "default"
+}
+
+variable "policy_identifier" {
+  default = ["lambda.amazonaws.com"]
 }
