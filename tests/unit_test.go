@@ -13,7 +13,7 @@ func TestTerraformAwsLambda(t *testing.T) {
 	t.Parallel()
 	// ----------------------------------------------------------
     // TF_VARS_FILE_PATH       := "test.tfvars"
-	TF_REPO_PATH            := "../examples"
+	TF_REPO_PATH            := "../examples/lambda_without_event-test"
 	functionName            := "rumse-demo-lambda"
 	teamid                  := "rumse"
 	prjid                   := "demo-lambda"

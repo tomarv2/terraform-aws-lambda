@@ -3,9 +3,9 @@ output "lambda_arn" {
   value       = module.lambda.lambda_arn
 }
 
-output "lambda_role" {
-  description = "IAM role used by Lambda function"
-  value       = module.lambda.lambda_role
+output "lambda_iam_role_arn" {
+  description = "ARN of IAM role used by Lambda function"
+  value       = module.lambda.lambda_iam_role_arn
 }
 
 output "input_file_name" {
@@ -21,4 +21,8 @@ output "output_file_path" {
 output "output_file_size" {
   description = "Output filepath size"
   value       = module.lambda.output_file_size
+}
+
+output "cloudwatch_lambda_permissions" {
+  value = module.lambda.cloudwatch_lambda_permissions
 }

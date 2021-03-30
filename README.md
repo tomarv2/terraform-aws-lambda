@@ -149,3 +149,8 @@ Please refer to examples directory [link](examples) for references.
 | lambda\_role | IAM role used by Lambda function |
 | output\_file\_path | Output filepath location |
 | output\_file\_size | Output filepath size |
+
+
+
+#
+https://github.com/spring-media/terraform-aws-lambda/blob/master/modules/event/cloudwatch-event/main.tf
