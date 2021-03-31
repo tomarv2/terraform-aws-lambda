@@ -4,7 +4,7 @@ module "lambda" {
   account_id = "123456789012"
   #
   # NOTE: One of the below is required:
-  # existing `role`
+  # existing `role` or
   # `profile_to_use_for_iam` and `policy_identifier`
   # `profile_to_use_for_iam`: to handle the case where deployment account does not have permission
   # to manage IAM
