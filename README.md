@@ -15,7 +15,7 @@
         <img src="https://img.shields.io/twitter/follow/varuntomar2019?style=social&logo=twitter"></a>
 </p>
 
-## Terraform module to create AWS Lambda
+# Terraform module to create [AWS Lambda]((https://registry.terraform.io/modules/tomarv2/lambda/aws/latest))
 
 ## Versions
 
@@ -122,7 +122,7 @@ module "common" {
 }
 
 module "lambda" {
-  source = "../../"
+  source = "git::git@github.com:tomarv2/terraform-aws-lambda.git?ref=v0.0.2"
 
   account_id             = "123456789012"
   #
