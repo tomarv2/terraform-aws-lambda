@@ -1,5 +1,5 @@
 module "cloudwatch_event" {
-  source = "git::git@github.com:tomarv2/terraform-aws-cloudwatch-events.git"
+  source = "git::git@github.com:tomarv2/terraform-aws-cloudwatch-events.git?ref=v0.0.1"
 
   deploy_event_rule   = var.deploy_cloudwatch_event_trigger
   deploy_event_target = var.deploy_cloudwatch_event_trigger
