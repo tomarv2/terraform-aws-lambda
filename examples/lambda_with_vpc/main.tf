@@ -7,7 +7,7 @@ module "common" {
 }
 
 module "lambda" {
-  source = "../../"
+    source = "git::git@github.com:tomarv2/terraform-aws-lambda.git"
 
   account_id             = "123456789012"
   #

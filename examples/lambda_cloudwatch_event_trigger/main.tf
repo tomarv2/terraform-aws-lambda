@@ -1,5 +1,5 @@
 module "lambda" {
-  source = "../../"
+  source = "git::git@github.com:tomarv2/terraform-aws-lambda.git?ref=v0.0.2"
 
   deploy_cloudwatch_event_trigger = true
 
@@ -11,7 +11,7 @@ module "lambda" {
   # `profile_to_use_for_iam`: to handle the case where deployment account does not have permission
   # to manage IAM
   #role             = "arn:aws:iam::123456789012:role/demo-role"
-  profile_to_use_for_iam = "aws-dev-security_databricks-iam-admin"
+  profile_to_use_for_iam = "iam-admin"
   policy_identifier      = ["events.amazonaws.com", "cloudwatch.amazonaws.com", "lambda.amazonaws.com"]
 
   runtime          = "python3.8"

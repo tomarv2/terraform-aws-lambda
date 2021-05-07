@@ -1,5 +1,5 @@
 module "lambda" {
-  source = "../../"
+  source = "git::git@github.com:tomarv2/terraform-aws-lambda.git?ref=v0.0.2"
 
   account_id = "123456789012"
   #
