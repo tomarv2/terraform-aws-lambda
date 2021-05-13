@@ -10,8 +10,8 @@ module "iam_role" {
   policy_arn        = var.role == null ? ["arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"] : []
   #-----------------------------------------------
   # Note: Do not change teamid and prjid once set.
-  teamid = var.prjid
-  prjid  = var.teamid
+  teamid = var.teamid
+  prjid  = var.prjid
 }
 
 module "iam_role_existing" {
@@ -24,6 +24,6 @@ module "iam_role_existing" {
   policy_arn                  = var.vpc_config != null ? ["arn:aws:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"] : []
   #-----------------------------------------------
   # Note: Do not change teamid and prjid once set.
-  teamid = var.prjid
-  prjid  = var.teamid
+  teamid = var.teamid
+  prjid  = var.prjid
 }

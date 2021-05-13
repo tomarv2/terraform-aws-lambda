@@ -4,6 +4,9 @@ terraform {
     aws = {
       version = "~> 3.30"
     }
+    archive = {
+      version = "~> 2.2.0"
+    }
   }
 }
 
