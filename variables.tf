@@ -1,37 +1,49 @@
 variable "teamid" {
   description = "(Required) name of the team/group e.g. devops, dataengineering. Should not be changed after running 'tf apply'"
+  type        = string
 }
 
 variable "prjid" {
   description = "(Required) name of the project/stack e.g: mystack, nifieks, demoaci. Should not be changed after running 'tf apply'"
+  type        = string
 }
 
 variable "profile_to_use" {
   description = "Getting values from ~/.aws/credentials"
   default     = "default"
+  type        = string
 }
 
-variable "account_id" {}
+variable "account_id" {
+  description = "aws account to deploy resources in."
+  type        = string
+}
 
 variable "aws_region" {
-  default = "us-west-2"
+  description = "aws region to deploy resources in."
+  default     = "us-west-2"
+  type        = string
 }
 
 variable "role" {
   description = "IAM role attached to the Lambda Function. This governs both who / what can invoke your Lambda Function, as well as what resources our Lambda Function has access to."
   default     = null
+  type        = string
 }
 
 variable "handler" {
   description = "The function entrypoint in your code."
+  type        = string
 }
 
 variable "runtime" {
   default     = ""
   description = "See Runtimes for valid values."
+  type        = string
 }
 
 variable "environment" {
+  description = "environment variables to pass to lambda."
   type = object({
     variables = map(string)
   })
@@ -41,32 +53,59 @@ variable "environment" {
 variable "memory_size" {
   default     = 128
   description = "Amount of memory in MB your Lambda Function can use at runtime. Defaults to 128."
+  type        = number
+
 }
 
 variable "timeout" {
   default     = 30
   description = "The amount of time your Lambda Function has to run in seconds. Defaults to 3."
+  type        = number
 }
 
 variable "description" {
   default     = ""
   description = "Description of what your Lambda Function does."
+  type        = string
 }
 
 variable "performance_mode" {
   description = "The performance mode of your file system."
   default     = "generalPurpose"
+  type        = string
 }
 
-variable "source_file" {}
+variable "source_file" {
+  description = "input file path on local machine to zip"
+  default     = null
+  type        = string
+}
 
-variable "output_file_path" {}
+variable "source_dir" {
+  description = "input directory path on local machine to zip"
+  default     = null
+  type        = string
+}
+
+variable "output_path" {
+  description = "output file path on local machine to deploy to lambda"
+  type        = string
+}
+
+variable "exclude_files" {
+  description = "file to exclude in directory from zipping"
+  default     = null
+  type        = string
+}
 
 variable "archive_type" {
-  default = "zip"
+  description = "archive file type."
+  default     = "zip"
+  type        = string
 }
 
 variable "tracing_config" {
+  description = "Tracing config."
   type = object({
     mode = string
   })
@@ -76,6 +115,7 @@ variable "tracing_config" {
 }
 
 variable "vpc_config" {
+  description = "vpc config."
   type = object({
     security_group_ids = list(string)
     subnet_ids         = list(string)
@@ -84,6 +124,7 @@ variable "vpc_config" {
 }
 
 variable "dead_letter_config" {
+  description = "dead letter config."
   type = object({
     target_arn = string
   })
@@ -91,18 +132,21 @@ variable "dead_letter_config" {
 }
 
 variable "reserved_concurrent_executions" {
-  type    = number
-  default = null
+  description = "reserved concurrent execution."
+  type        = number
+  default     = null
 }
 
 variable "layers" {
-  type    = list(string)
-  default = null
+  description = "lambda layers."
+  type        = list(string)
+  default     = null
 }
 
 variable "cloudwatch_path" {
   description = "name of the log group"
   default     = "aws/lambda"
+  type        = string
 }
 
 variable "deploy" {
@@ -161,18 +205,26 @@ variable "file_system_local_mount_path" {
 
 # Cloudwatch trigger
 variable "deploy_cloudwatch_event_trigger" {
+  description = "deploy cloud watch event trigger"
+
   type    = bool
   default = false
 }
 
 variable "source_arn" {
-  default = null
+  description = "source arn."
+  default     = null
+  type        = string
 }
 
 variable "profile_to_use_for_iam" {
-  default = "default"
+  description = "profile to use for iam role creation."
+  default     = "default"
+  type        = string
 }
 
 variable "policy_identifier" {
-  default = ["lambda.amazonaws.com"]
+  description = "iam policy identifier."
+  default     = ["lambda.amazonaws.com"]
+  type        = list(string)
 }

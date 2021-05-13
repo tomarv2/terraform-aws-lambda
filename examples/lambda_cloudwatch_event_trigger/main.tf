@@ -1,5 +1,5 @@
 module "lambda" {
-  source = "git::git@github.com:tomarv2/terraform-aws-lambda.git?ref=v0.0.2"
+  source = "git::git@github.com:tomarv2/terraform-aws-lambda.git"
 
   deploy_cloudwatch_event_trigger = true
 
@@ -14,10 +14,13 @@ module "lambda" {
   profile_to_use_for_iam = "iam-admin"
   policy_identifier      = ["events.amazonaws.com", "cloudwatch.amazonaws.com", "lambda.amazonaws.com"]
 
-  runtime          = "python3.8"
-  handler          = "lambda_function.lambda_handler"
-  source_file      = "lambda_function.py"
-  output_file_path = "/tmp/test.zip"
+  runtime = "python3.8"
+  handler = "lambda_function.lambda_handler"
+  #NOTE: `source_file` or `source_dir` and/or `exclude_files` is required
+  #source_file      = "lambda_function.py"
+  source_dir    = "demo_lambda"
+  exclude_files = ["exclude_file.txt"]
+  output_path   = "/tmp/test.zip"
   environment = {
     variables = {
       HELLO = "WORLD"
@@ -29,4 +32,3 @@ module "lambda" {
   teamid = var.teamid
   prjid  = var.prjid
 }
-

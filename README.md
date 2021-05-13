@@ -1,6 +1,6 @@
 <p align="center">
-    <a href="https://github.com/tomarv2/terraform-aws-lambda/actions/workflows/security_scans.yml" alt="Security Scans">
-        <img src="https://github.com/tomarv2/terraform-aws-lambda/actions/workflows/security_scans.yml/badge.svg?branch=main" /></a>
+    <a href="https://github.com/tomarv2/terraform-aws-lambda/actions/workflows/pre-commit.yml" alt="Pre Commit">
+        <img src="https://github.com/tomarv2/terraform-aws-lambda/actions/workflows/pre-commit.yml/badge.svg?branch=main" /></a>
     <a href="https://www.apache.org/licenses/LICENSE-2.0" alt="license">
         <img src="https://img.shields.io/github/license/tomarv2/terraform-aws-lambda" /></a>
     <a href="https://github.com/tomarv2/terraform-aws-lambda/tags" alt="GitHub tag">
@@ -20,10 +20,10 @@
 ## Versions
 
 - Module tested for Terraform 0.14.
-- AWS provider version [3.30.0](https://registry.terraform.io/providers/hashicorp/aws/latest)
-- `main` branch: Provider versions not pinned to keep up with Terraform releases
+- AWS provider version [3.30.0](https://registry.terraform.io/providers/hashicorp/aws/latest).
+- `main` branch: Provider versions not pinned to keep up with Terraform releases.
 - `tags` releases: Tags are pinned with versions (use <a href="https://github.com/tomarv2/terraform-aws-lambda/tags" alt="GitHub tag">
-        <img src="https://img.shields.io/github/v/tag/tomarv2/terraform-aws-lambda" /></a> in your releases)
+        <img src="https://img.shields.io/github/v/tag/tomarv2/terraform-aws-lambda" /></a>).
 
 
 ## Usage
@@ -83,7 +83,7 @@ tf -cloud aws destroy -var='teamid=foo' -var='prjid=bar'
 #### Lambda (without event)
 ```
 module "lambda" {
-  source = "git::git@github.com:tomarv2/terraform-aws-lambda.git?ref=v0.0.2"
+  source = "git::git@github.com:tomarv2/terraform-aws-lambda.git"
 
   account_id             = "123456789012"
   #
@@ -95,8 +95,11 @@ module "lambda" {
   role                   = "arn:aws:iam::123456789012:role/demo-role"
   runtime                = "python3.8"
   handler                = "lambda_function.lambda_handler"
-  source_file            = "lambda_function.py"
-  output_file_path       = "/tmp/test.zip"
+  #NOTE: `source_file` or `source_dir` and/or `exclude_files` is required
+  #source_file           = "lambda_function.py"
+  source_dir             = "demo_lambda"
+  exclude_files          = ["exclude_file.txt"]
+  output_path            = "/tmp/test.zip"
   profile_to_use_for_iam = "iam-admin"
   aws_region             = var.aws_region
   environment = {
@@ -112,17 +115,17 @@ module "lambda" {
 ```
 
 #### Lambda(with VPC)
-``` 
+```
 module "global" {
-  source = "git::git@github.com:tomarv2/terraform-global.git//aws?ref=v0.0.1"
+  source = "git::git@github.com:tomarv2/terraform-global.git//aws"
 }
 
 module "common" {
-  source = "git::git@github.com:tomarv2/terraform-global.git//common?ref=v0.0.1"
+  source = "git::git@github.com:tomarv2/terraform-global.git//common"
 }
 
 module "lambda" {
-  source = "git::git@github.com:tomarv2/terraform-aws-lambda.git?ref=v0.0.2"
+  source = "git::git@github.com:tomarv2/terraform-aws-lambda.git"
 
   account_id             = "123456789012"
   #
@@ -134,8 +137,11 @@ module "lambda" {
   profile_to_use_for_iam = "iam-admin"
   runtime                = "python3.8"
   handler                = "lambda_function.lambda_handler"
-  source_file            = "lambda_function.py"
-  output_file_path       = "/tmp/test.zip"
+  #NOTE: `source_file` or `source_dir` and/or `exclude_files` is required
+  #source_file           = "lambda_function.py"
+  source_dir             = "demo_lambda"
+  exclude_files          = ["exclude_file.txt"]
+  output_path            = "/tmp/test.zip"
   environment = {
     variables = {
       HELLO = "WORLD"
@@ -153,7 +159,7 @@ module "lambda" {
 }
 
 module "security_group" {
-  source = "git::git@github.com:tomarv2/terraform-aws-security-group.git?ref=v0.0.2"
+  source = "git::git@github.com:tomarv2/terraform-aws-security-group.git"
 
   account_id = "123456789012"
   security_group_ingress = {
@@ -232,4 +238,3 @@ Please refer to examples directory [link](examples) for references.
 | lambda\_role | IAM role used by Lambda function |
 | output\_file\_path | Output filepath location |
 | output\_file\_size | Output filepath size |
-

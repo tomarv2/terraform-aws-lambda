@@ -10,19 +10,35 @@ output "lambda_iam_role_arn" {
 
 output "input_file_name" {
   description = "Source code location"
-  value       = join("", data.archive_file.zip.*.source_file)
+  value       = join("", data.archive_file.zip_file.*.source_file)
 }
 
 output "output_file_path" {
-  description = "Output filepath location"
-  value       = data.archive_file.zip.output_path
+  description = "Output file path location"
+  value       = join("", data.archive_file.zip_file.*.output_path)
 }
 
 output "output_file_size" {
-  description = "Output filepath size"
-  value       = data.archive_file.zip.output_size
+  description = "Output file path size"
+  value       = join("", data.archive_file.zip_file.*.output_size)
+}
+
+output "input_dir_name" {
+  description = "Source code location"
+  value       = join("", data.archive_file.zip_dir.*.source_dir)
+}
+
+output "output_dir_path" {
+  description = "Output dir path location"
+  value       = join("", data.archive_file.zip_dir.*.output_path)
+}
+
+output "output_dir_size" {
+  description = "Output dir path size"
+  value       = join("", data.archive_file.zip_dir.*.output_size)
 }
 
 output "cloudwatch_lambda_permissions" {
-  value = join("", aws_lambda_permission.cloudwatch.*.id)
+  description = "cloudwatch permission for lambda"
+  value       = join("", aws_lambda_permission.cloudwatch.*.id)
 }
