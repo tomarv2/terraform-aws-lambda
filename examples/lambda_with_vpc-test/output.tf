@@ -32,8 +32,3 @@ output "output_dir_size" {
   description = "Output filepath size"
   value       = module.lambda.output_dir_size
 }
-
-output "cloudwatch_lambda_permissions" {
-  description = "cloudwatch permission for lambda"
-  value       = module.lambda.cloudwatch_lambda_permissions
-}

@@ -37,8 +37,3 @@ output "output_dir_size" {
   description = "Output dir path size"
   value       = join("", data.archive_file.zip_dir.*.output_size)
 }
-
-output "cloudwatch_lambda_permissions" {
-  description = "cloudwatch permission for lambda"
-  value       = join("", aws_lambda_permission.cloudwatch.*.id)
-}
