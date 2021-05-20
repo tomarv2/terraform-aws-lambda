@@ -54,9 +54,4 @@ resource "aws_lambda_function" "lambda" {
       arn              = var.file_system_arn
     }
   }
-
-  depends_on = [
-    data.archive_file.zip,
-    module.cloudwatch
-  ]
 }

@@ -93,9 +93,9 @@ variable "output_path" {
 }
 
 variable "exclude_files" {
-  description = "file to exclude in directory from zipping"
+  description = "file(s) to exclude in directory from zipping"
   default     = null
-  type        = string
+  type        = list(any)
 }
 
 variable "archive_type" {
@@ -227,4 +227,24 @@ variable "policy_identifier" {
   description = "iam policy identifier."
   default     = ["lambda.amazonaws.com"]
   type        = list(string)
+}
+
+variable "runtime_dependencies" {
+  description = "feature flag install runtime dependencies."
+  type        = bool
+  default     = false
+}
+
+variable "dependencies_path" {
+  description = "Location of dependencies management script."
+  default     = null
+  type        = string
+}
+
+variable "cloudwatch_event" {
+  description = "Map of cloudwatch event configuration"
+  type        = map(any)
+  default = {
+    default = {}
+  }
 }

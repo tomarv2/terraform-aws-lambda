@@ -5,7 +5,10 @@ terraform {
       version = "~> 3.30"
     }
     archive = {
-      version = "~> 2.2.0"
+      version = "~> 2.1"
+    }
+    null = {
+      version = "~> 3.1.0"
     }
   }
 }
