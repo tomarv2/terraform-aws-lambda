@@ -2,38 +2,43 @@
 
 echo "Executing install_dependencies.sh..."
 
+# Abort if a requierements file doesn't exist
+FILE=$source_code_path/requirements.txt
+if [ ! -e $FILE ]; then
+  echo "Error: $FILE does not exist!"
+  exit 1
+fi
 
+# Run from the specified directory
 cd $path_cwd
+
+# Create a temp directory if it doesn't exist
 dir_name=/tmp/lambda_dist_pkg/
-mkdir $dir_name
+if [ -d $dir_name ];
+  echo "Reusing package staging directory ($dir_name)"
+else
+  echo "Creating package staging directory ($dir_name)"
+  mkdir $dir_name || exit 2
 
 # Create and activate virtual environment...
-virtualenv -p $runtime env_$function_name
-source $path_cwd/env_$function_name/bin/activate
+virtualenv -p $runtime env_$function_name || exit 3
+source env_$function_name/bin/activate || exit 4
 
 # Installing python dependencies...
-FILE=$source_code_path/requirements.txt
-
-if [ -f "$FILE" ]; then
-  echo "Installing dependencies..."
-  echo "From: requirement.txt file exists..."
-  pip install -r "$FILE"
-
-else
-  echo "Error: requirement.txt does not exist!"
-fi
+echo "Installing dependencies from $FILE..."
+pip install -r "$FILE" || exit 5
 
 # Deactivate virtual environment...
 deactivate
 
 # Create deployment package...
 echo "Creating deployment package..."
-cd env_$function_name/lib/$runtime/site-packages/
-cp -r . $dir_name
-cp -r $path_cwd/$source_code_path/ $dir_name
+( cd env_$function_name/lib/$runtime/site-packages/ && cp -r * $dir_name) || exit 6
+
+cp -r $source_code_path/ $dir_name || exit 7
 
 # Removing virtual environment folder...
 echo "Removing virtual environment folder..."
-rm -rf $path_cwd/env_$function_name
+rm -rf env_$function_name
 
 echo "Finished script execution!"
