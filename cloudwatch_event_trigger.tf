@@ -1,5 +1,5 @@
 module "cloudwatch_event" {
-  source = "git::git@github.com:tomarv2/terraform-aws-cloudwatch-events.git?ref=v0.0.3"
+  source = "git::git@github.com:tomarv2/terraform-aws-cloudwatch-event.git?ref=v0.0.4"
 
   for_each = var.cloudwatch_event
 

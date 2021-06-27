@@ -14,11 +14,6 @@ variable "profile_to_use" {
   type        = string
 }
 
-variable "account_id" {
-  description = "aws account to deploy resources in."
-  type        = string
-}
-
 variable "aws_region" {
   description = "aws region to deploy resources in."
   default     = "us-west-2"
@@ -66,12 +61,6 @@ variable "timeout" {
 variable "description" {
   default     = ""
   description = "Description of what your Lambda Function does."
-  type        = string
-}
-
-variable "performance_mode" {
-  description = "The performance mode of your file system."
-  default     = "generalPurpose"
   type        = string
 }
 
@@ -155,12 +144,6 @@ variable "deploy" {
   default     = true
 }
 
-variable "deploy_package" {
-  description = "Controls whether Lambda package should be created"
-  type        = bool
-  default     = true
-}
-
 variable "deploy_function" {
   description = "Controls whether Lambda Function resource should be created"
   type        = bool
@@ -211,13 +194,7 @@ variable "deploy_cloudwatch_event_trigger" {
   default = false
 }
 
-variable "source_arn" {
-  description = "source arn."
-  default     = null
-  type        = string
-}
-
-variable "profile_to_use_for_iam" {
+variable "profile_for_iam" {
   description = "profile to use for iam role creation."
   default     = "default"
   type        = string

@@ -81,6 +81,7 @@ _testmain.go
 
 # ignore test file(s)
 **test**
+examples/*test
+remote_backend.tf
 # Do not ignore files in .github (actions)
 !.github
-!.tests/*
