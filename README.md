@@ -130,7 +130,7 @@ module "lambda" {
 ```
 
 ### Lambda(Cloudwatch trigger)
-``` 
+```
 module "lambda" {
   source = "../../"
 
