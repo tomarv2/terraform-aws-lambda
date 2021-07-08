@@ -5,7 +5,7 @@ module "cloudwatch_event" {
 
   description  = lookup(each.value, "description", null)
   custom_input = lookup(each.value, "custom_input", null)
-  suffix       = lookup(each.value, "suffix", "")
+  suffix       = lookup(each.value, "suffix", "rule")
   schedule     = lookup(each.value, "schedule", null)
 
   deploy_event_rule   = var.deploy_cloudwatch_event_trigger
