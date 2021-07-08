@@ -1,7 +1,8 @@
+/*
 locals {
   profile_to_use = var.role != null ? var.role : var.profile_for_iam
 }
-
+*/
 
 terraform {
   required_version = ">= 1.0.1"
@@ -26,5 +27,5 @@ provider "aws" {
 provider "aws" {
   alias   = "iam-management"
   region  = var.aws_region
-  profile = local.profile_to_use
+  profile = var.profile_for_iam
 }
