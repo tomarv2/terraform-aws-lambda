@@ -28,9 +28,8 @@ repos:
       - id: check-yaml
 
   - repo: https://github.com/bridgecrewio/checkov.git
-    rev: '1.0.864' # change to tag or sha
+    rev: '2.0.469'
     hooks:
     - id: checkov
       verbose: true
-      args:
-      - -d . --framework terraform -o output_format json
+      args: [-d, '.', --framework,'terraform']
