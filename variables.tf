@@ -134,7 +134,7 @@ variable "layers" {
 
 variable "cloudwatch_path" {
   description = "name of the log group"
-  default     = "aws/lambda"
+  default     = "/aws/lambda"
   type        = string
 }
 

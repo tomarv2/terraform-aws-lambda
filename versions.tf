@@ -1,20 +1,14 @@
-/*
-locals {
-  profile_to_use = var.role != null ? var.role : var.profile_for_iam
-}
-*/
-
 terraform {
   required_version = ">= 1.0.1"
   required_providers {
     aws = {
-      version = "~> 3.47"
+      version = ">= 3.47"
     }
     archive = {
-      version = "~> 2.1"
+      version = ">= 2.1"
     }
     null = {
-      version = "~> 3.1.0"
+      version = ">= 3.1.0"
     }
   }
 }

@@ -15,7 +15,7 @@
         <img src="https://img.shields.io/twitter/follow/varuntomar2019?style=social&logo=twitter"></a>
 </p>
 
-# Terraform module to create [AWS Lambda]((https://registry.terraform.io/modules/tomarv2/lambda/aws/latest))
+# Terraform module to create [AWS Lambda]((https://registry.terraform.io/modules/tomarv2/lambda/aws/latest)
 
 ## Versions
 
@@ -287,7 +287,7 @@ Please refer to examples directory [link](examples) for references.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_cloudwatch"></a> [cloudwatch](#module\_cloudwatch) | git::git@github.com:tomarv2/terraform-aws-cloudwatch.git | v0.0.2 |
+| <a name="module_cloudwatch"></a> [cloudwatch](#module\_cloudwatch) | git::git@github.com:tomarv2/terraform-aws-cloudwatch.git | v0.0.4 |
 | <a name="module_cloudwatch_event"></a> [cloudwatch\_event](#module\_cloudwatch\_event) | git::git@github.com:tomarv2/terraform-aws-cloudwatch-event.git | v0.0.4 |
 | <a name="module_iam_role"></a> [iam\_role](#module\_iam\_role) | git::git@github.com:tomarv2/terraform-aws-iam-role.git//modules/iam_role_instance | v0.0.4 |
 | <a name="module_iam_role_existing"></a> [iam\_role\_existing](#module\_iam\_role\_existing) | git::git@github.com:tomarv2/terraform-aws-iam-role.git//modules/iam_role_instance | v0.0.4 |
@@ -309,7 +309,7 @@ Please refer to examples directory [link](examples) for references.
 | <a name="input_archive_type"></a> [archive\_type](#input\_archive\_type) | archive file type. | `string` | `"zip"` | no |
 | <a name="input_aws_region"></a> [aws\_region](#input\_aws\_region) | aws region to deploy resources in. | `string` | `"us-west-2"` | no |
 | <a name="input_cloudwatch_event"></a> [cloudwatch\_event](#input\_cloudwatch\_event) | Map of cloudwatch event configuration | `map(any)` | <pre>{<br>  "default": {}<br>}</pre> | no |
-| <a name="input_cloudwatch_path"></a> [cloudwatch\_path](#input\_cloudwatch\_path) | name of the log group | `string` | `"aws/lambda"` | no |
+| <a name="input_cloudwatch_path"></a> [cloudwatch\_path](#input\_cloudwatch\_path) | name of the log group | `string` | `"/aws/lambda"` | no |
 | <a name="input_dead_letter_config"></a> [dead\_letter\_config](#input\_dead\_letter\_config) | dead letter config. | <pre>object({<br>    target_arn = string<br>  })</pre> | `null` | no |
 | <a name="input_dependencies_path"></a> [dependencies\_path](#input\_dependencies\_path) | Location of dependencies management script. | `string` | `null` | no |
 | <a name="input_deploy"></a> [deploy](#input\_deploy) | Controls whether resources should be created | `bool` | `true` | no |
