@@ -15,7 +15,7 @@
         <img src="https://img.shields.io/twitter/follow/varuntomar2019?style=social&logo=twitter"></a>
 </p>
 
-# Terraform module to create [AWS Lambda]((https://registry.terraform.io/modules/tomarv2/lambda/aws/latest)
+# Terraform module to create [AWS Lambda](https://registry.terraform.io/modules/tomarv2/lambda/aws/latest)
 
 ## Versions
 
