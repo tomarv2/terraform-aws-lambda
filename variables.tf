@@ -138,14 +138,8 @@ variable "cloudwatch_path" {
   type        = string
 }
 
-variable "deploy" {
+variable "deploy_lambda" {
   description = "Controls whether resources should be created"
-  type        = bool
-  default     = true
-}
-
-variable "deploy_function" {
-  description = "Controls whether Lambda Function resource should be created"
   type        = bool
   default     = true
 }
@@ -223,5 +217,12 @@ variable "cloudwatch_event" {
   type        = map(any)
   default = {
     default = {}
+    default = {}
   }
+}
+
+variable "deploy_cloudwatch" {
+  description = "feature flag, true or false"
+  default     = true
+  type        = bool
 }

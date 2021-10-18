@@ -2,7 +2,7 @@ terraform {
   required_version = ">= 1.0.1"
   required_providers {
     aws = {
-      version = ">= 3.47"
+      version = ">= 3.61"
     }
     archive = {
       version = ">= 2.1"

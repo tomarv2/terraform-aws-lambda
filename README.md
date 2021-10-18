@@ -20,7 +20,7 @@
 ## Versions
 
 - Module tested for Terraform 1.0.1.
-- AWS provider version [3.47.0](https://registry.terraform.io/providers/hashicorp/aws/latest).
+- AWS provider version [3.61](https://registry.terraform.io/providers/hashicorp/aws/latest).
 - `main` branch: Provider versions not pinned to keep up with Terraform releases.
 - `tags` releases: Tags are pinned with versions (use <a href="https://github.com/tomarv2/terraform-aws-lambda/tags" alt="GitHub tag">
         <img src="https://img.shields.io/github/v/tag/tomarv2/terraform-aws-lambda" /></a>).
@@ -42,7 +42,7 @@ terraform destroy -var='teamid=tryme' -var='prjid=project1'
 
 #### Recommended method (stores remote state in S3 using `prjid` and `teamid` to create directory structure):
 
-- Create python 3.6+ virtual environment
+- Create python 3.8+ virtual environment
 ```
 python3 -m venv <venv name>
 ```
