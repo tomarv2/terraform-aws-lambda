@@ -271,9 +271,9 @@ Please refer to examples directory [link](examples) for references.
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0.1 |
-| <a name="requirement_archive"></a> [archive](#requirement\_archive) | ~> 2.1 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 3.47 |
-| <a name="requirement_null"></a> [null](#requirement\_null) | ~> 3.1.0 |
+| <a name="requirement_archive"></a> [archive](#requirement\_archive) | >= 2.1 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 3.61 |
+| <a name="requirement_null"></a> [null](#requirement\_null) | >= 3.1.0 |
 
 ## Providers
 
@@ -287,10 +287,10 @@ Please refer to examples directory [link](examples) for references.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_cloudwatch"></a> [cloudwatch](#module\_cloudwatch) | git::git@github.com:tomarv2/terraform-aws-cloudwatch.git | v0.0.4 |
+| <a name="module_cloudwatch"></a> [cloudwatch](#module\_cloudwatch) | git::git@github.com:tomarv2/terraform-aws-cloudwatch.git | v0.0.6 |
 | <a name="module_cloudwatch_event"></a> [cloudwatch\_event](#module\_cloudwatch\_event) | git::git@github.com:tomarv2/terraform-aws-cloudwatch-event.git | v0.0.4 |
-| <a name="module_iam_role"></a> [iam\_role](#module\_iam\_role) | git::git@github.com:tomarv2/terraform-aws-iam-role.git//modules/iam_role_instance | v0.0.4 |
-| <a name="module_iam_role_existing"></a> [iam\_role\_existing](#module\_iam\_role\_existing) | git::git@github.com:tomarv2/terraform-aws-iam-role.git//modules/iam_role_instance | v0.0.4 |
+| <a name="module_iam_role"></a> [iam\_role](#module\_iam\_role) | git::git@github.com:tomarv2/terraform-aws-iam-role.git//modules/iam_role_instance | v0.0.5 |
+| <a name="module_iam_role_existing"></a> [iam\_role\_existing](#module\_iam\_role\_existing) | git::git@github.com:tomarv2/terraform-aws-iam-role.git//modules/iam_role_instance | v0.0.5 |
 
 ## Resources
 
@@ -312,9 +312,9 @@ Please refer to examples directory [link](examples) for references.
 | <a name="input_cloudwatch_path"></a> [cloudwatch\_path](#input\_cloudwatch\_path) | name of the log group | `string` | `"/aws/lambda"` | no |
 | <a name="input_dead_letter_config"></a> [dead\_letter\_config](#input\_dead\_letter\_config) | dead letter config. | <pre>object({<br>    target_arn = string<br>  })</pre> | `null` | no |
 | <a name="input_dependencies_path"></a> [dependencies\_path](#input\_dependencies\_path) | Location of dependencies management script. | `string` | `null` | no |
-| <a name="input_deploy"></a> [deploy](#input\_deploy) | Controls whether resources should be created | `bool` | `true` | no |
+| <a name="input_deploy_cloudwatch"></a> [deploy\_cloudwatch](#input\_deploy\_cloudwatch) | feature flag, true or false | `bool` | `true` | no |
 | <a name="input_deploy_cloudwatch_event_trigger"></a> [deploy\_cloudwatch\_event\_trigger](#input\_deploy\_cloudwatch\_event\_trigger) | deploy cloud watch event trigger | `bool` | `false` | no |
-| <a name="input_deploy_function"></a> [deploy\_function](#input\_deploy\_function) | Controls whether Lambda Function resource should be created | `bool` | `true` | no |
+| <a name="input_deploy_lambda"></a> [deploy\_lambda](#input\_deploy\_lambda) | Controls whether resources should be created | `bool` | `true` | no |
 | <a name="input_deploy_layer"></a> [deploy\_layer](#input\_deploy\_layer) | Controls whether Lambda Layer resource should be created | `bool` | `false` | no |
 | <a name="input_description"></a> [description](#input\_description) | Description of what your Lambda Function does. | `string` | `""` | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | environment variables to pass to lambda. | <pre>object({<br>    variables = map(string)<br>  })</pre> | `null` | no |
@@ -350,6 +350,7 @@ Please refer to examples directory [link](examples) for references.
 | <a name="output_input_dir_name"></a> [input\_dir\_name](#output\_input\_dir\_name) | Source code location |
 | <a name="output_input_file_name"></a> [input\_file\_name](#output\_input\_file\_name) | Source code location |
 | <a name="output_lambda_arn"></a> [lambda\_arn](#output\_lambda\_arn) | ARN of the Lambda function |
+| <a name="output_lambda_function_name"></a> [lambda\_function\_name](#output\_lambda\_function\_name) | Name of the Lambda function |
 | <a name="output_lambda_iam_role_arn"></a> [lambda\_iam\_role\_arn](#output\_lambda\_iam\_role\_arn) | ARN of IAM role used by Lambda function |
 | <a name="output_output_dir_path"></a> [output\_dir\_path](#output\_output\_dir\_path) | Output dir path location |
 | <a name="output_output_dir_size"></a> [output\_dir\_size](#output\_output\_dir\_size) | Output dir path size |
