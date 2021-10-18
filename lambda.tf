@@ -1,8 +1,8 @@
 resource "aws_lambda_function" "lambda" {
-  count = var.deploy && var.deploy_function && !var.deploy_layer ? 1 : 0
+  count = var.deploy_lambda && !var.deploy_layer ? 1 : 0
 
   function_name                  = "${var.teamid}-${var.prjid}"
-  description                    = var.description == "" ? "Managed by Terraform: ${var.teamid}-${var.prjid}" : var.description
+  description                    = var.description == "" ? "Terraform managed: ${var.teamid}-${var.prjid}" : var.description
   filename                       = var.source_file != null ? join("", data.archive_file.zip_file.*.output_path) : join("", data.archive_file.zip_dir.*.output_path)
   source_code_hash               = var.source_file != null ? join("", data.archive_file.zip_file.*.output_base64sha256) : join("", data.archive_file.zip_dir.*.output_base64sha256)
   role                           = var.role == null ? module.iam_role.iam_role_arn : var.role
