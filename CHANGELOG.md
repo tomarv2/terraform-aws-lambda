@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## [v0.0.9](https://github.com/tomarv2/terraform-aws-lambda/releases/tag/v0.0.9) - 2021-10-19 21:20:37
+
+Release for version refs/tags/v0.0.9. Please check CHANGELOG.md for more information.
+
 ## [v0.0.8](https://github.com/tomarv2/terraform-aws-lambda/releases/tag/v0.0.8) - 2021-10-18 18:11:29
 
 Release for version refs/tags/v0.0.8. Please check CHANGELOG.md for more information.
