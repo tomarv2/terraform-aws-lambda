@@ -8,18 +8,6 @@ variable "prjid" {
   type        = string
 }
 
-variable "profile_to_use" {
-  description = "Getting values from ~/.aws/credentials"
-  default     = "default"
-  type        = string
-}
-
-variable "aws_region" {
-  description = "aws region to deploy resources in."
-  default     = "us-west-2"
-  type        = string
-}
-
 variable "role" {
   description = "IAM role attached to the Lambda Function. This governs both who / what can invoke your Lambda Function, as well as what resources our Lambda Function has access to."
   default     = null
@@ -225,4 +213,16 @@ variable "deploy_cloudwatch" {
   description = "feature flag, true or false"
   default     = true
   type        = bool
+}
+
+variable "aws_region" {
+  description = "aws region to deploy resources"
+  default     = null
+  type        = string
+}
+
+variable "profile_to_use" {
+  description = "Getting values from ~/.aws/credentials"
+  default     = "default"
+  type        = string
 }

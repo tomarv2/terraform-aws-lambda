@@ -18,9 +18,8 @@ module "lambda" {
   # --------------------------------------------------
   output_path = "/tmp/test.zip"
 
-  runtime    = "python3.8"
-  handler    = "lambda_function.lambda_handler"
-  aws_region = "us-west-2"
+  runtime = "python3.8"
+  handler = "lambda_function.lambda_handler"
   environment = {
     variables = {
       HELLO = "WORLD"
