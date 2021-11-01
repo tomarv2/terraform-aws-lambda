@@ -272,7 +272,7 @@ Please refer to examples directory [link](examples) for references.
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0.1 |
 | <a name="requirement_archive"></a> [archive](#requirement\_archive) | >= 2.1 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 3.61 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 3.63 |
 | <a name="requirement_null"></a> [null](#requirement\_null) | >= 3.1.0 |
 
 ## Providers
@@ -287,8 +287,8 @@ Please refer to examples directory [link](examples) for references.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_cloudwatch"></a> [cloudwatch](#module\_cloudwatch) | git::git@github.com:tomarv2/terraform-aws-cloudwatch.git | v0.0.6 |
-| <a name="module_cloudwatch_event"></a> [cloudwatch\_event](#module\_cloudwatch\_event) | git::git@github.com:tomarv2/terraform-aws-cloudwatch-event.git | v0.0.4 |
+| <a name="module_cloudwatch"></a> [cloudwatch](#module\_cloudwatch) | git::git@github.com:tomarv2/terraform-aws-cloudwatch.git | v0.0.7 |
+| <a name="module_cloudwatch_event"></a> [cloudwatch\_event](#module\_cloudwatch\_event) | git::git@github.com:tomarv2/terraform-aws-cloudwatch-event.git | v0.0.5 |
 | <a name="module_iam_role"></a> [iam\_role](#module\_iam\_role) | git::git@github.com:tomarv2/terraform-aws-iam-role.git//modules/iam_role_instance | v0.0.5 |
 | <a name="module_iam_role_existing"></a> [iam\_role\_existing](#module\_iam\_role\_existing) | git::git@github.com:tomarv2/terraform-aws-iam-role.git//modules/iam_role_instance | v0.0.5 |
 
@@ -307,8 +307,7 @@ Please refer to examples directory [link](examples) for references.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_archive_type"></a> [archive\_type](#input\_archive\_type) | archive file type. | `string` | `"zip"` | no |
-| <a name="input_aws_region"></a> [aws\_region](#input\_aws\_region) | aws region to deploy resources in. | `string` | `"us-west-2"` | no |
-| <a name="input_cloudwatch_event"></a> [cloudwatch\_event](#input\_cloudwatch\_event) | Map of cloudwatch event configuration | `map(any)` | <pre>{<br>  "default": {}<br>}</pre> | no |
+| <a name="input_cloudwatch_event"></a> [cloudwatch\_event](#input\_cloudwatch\_event) | Map of cloudwatch event configuration | `any` | n/a | yes |
 | <a name="input_cloudwatch_path"></a> [cloudwatch\_path](#input\_cloudwatch\_path) | name of the log group | `string` | `"/aws/lambda"` | no |
 | <a name="input_dead_letter_config"></a> [dead\_letter\_config](#input\_dead\_letter\_config) | dead letter config. | <pre>object({<br>    target_arn = string<br>  })</pre> | `null` | no |
 | <a name="input_dependencies_path"></a> [dependencies\_path](#input\_dependencies\_path) | Location of dependencies management script. | `string` | `null` | no |
@@ -326,12 +325,11 @@ Please refer to examples directory [link](examples) for references.
 | <a name="input_kms_key_arn"></a> [kms\_key\_arn](#input\_kms\_key\_arn) | The ARN of KMS key to use by your Lambda Function | `string` | `null` | no |
 | <a name="input_layers"></a> [layers](#input\_layers) | lambda layers. | `list(string)` | `null` | no |
 | <a name="input_memory_size"></a> [memory\_size](#input\_memory\_size) | Amount of memory in MB your Lambda Function can use at runtime. Defaults to 128. | `number` | `128` | no |
+| <a name="input_name"></a> [name](#input\_name) | Function name | `string` | `null` | no |
 | <a name="input_output_path"></a> [output\_path](#input\_output\_path) | output file path on local machine to deploy to lambda | `string` | n/a | yes |
 | <a name="input_package_type"></a> [package\_type](#input\_package\_type) | The Lambda deployment package type. Valid options: Zip or Image | `string` | `"Zip"` | no |
 | <a name="input_policy_identifier"></a> [policy\_identifier](#input\_policy\_identifier) | iam policy identifier. | `list(string)` | <pre>[<br>  "lambda.amazonaws.com"<br>]</pre> | no |
 | <a name="input_prjid"></a> [prjid](#input\_prjid) | (Required) name of the project/stack e.g: mystack, nifieks, demoaci. Should not be changed after running 'tf apply' | `string` | n/a | yes |
-| <a name="input_profile_for_iam"></a> [profile\_for\_iam](#input\_profile\_for\_iam) | profile to use for iam role creation. | `string` | `"default"` | no |
-| <a name="input_profile_to_use"></a> [profile\_to\_use](#input\_profile\_to\_use) | Getting values from ~/.aws/credentials | `string` | `"default"` | no |
 | <a name="input_reserved_concurrent_executions"></a> [reserved\_concurrent\_executions](#input\_reserved\_concurrent\_executions) | reserved concurrent execution. | `number` | `null` | no |
 | <a name="input_role"></a> [role](#input\_role) | IAM role attached to the Lambda Function. This governs both who / what can invoke your Lambda Function, as well as what resources our Lambda Function has access to. | `string` | `null` | no |
 | <a name="input_runtime"></a> [runtime](#input\_runtime) | See Runtimes for valid values. | `string` | `""` | no |
