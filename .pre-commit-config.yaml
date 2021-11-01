@@ -25,8 +25,8 @@ repos:
       - id: check-yaml
 
   - repo: https://github.com/bridgecrewio/checkov.git
-    rev: '2.0.469'
+    rev: '2.0.531'
     hooks:
     - id: checkov
       verbose: true
-      args: [-d, '.', --framework,'terraform']
+      args: [-d, '.', --framework, 'terraform']
