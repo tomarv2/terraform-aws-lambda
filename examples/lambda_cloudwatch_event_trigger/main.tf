@@ -28,20 +28,22 @@ module "lambda" {
   }
   # --------------------------------------------------
   deploy_cloudwatch_event_trigger = true
-  cloudwatch_event = {
-    project-alpha = {
-      description  = "alpha"
-      schedule     = "rate(2 days)"
-      custom_input = { "sourceVersion" = "main", "timeoutInMinutesOverride" = 66 }
-      suffix       = "alpha"
+  cloudwatch_event = [
+    {
+      name         = "demo"
+      description  = "demo: ${var.teamid}-${var.prjid}"
+      schedule     = "rate(1 day)"
+      custom_input = { "sourceVersion" = "dev", "timeoutInMinutesOverride" = 30 }
+      suffix       = "demo"
     },
-    project-beta = {
-      description  = "beta"
-      schedule     = "rate(3 days)"
-      custom_input = { "sourceVersion" = "main", "timeoutInMinutesOverride" = 770 }
-      suffix       = "beta"
+    {
+      name         = "sample"
+      description  = "sample: ${var.teamid}-${var.prjid}"
+      schedule     = "rate(2 days)"
+      custom_input = { "sourceVersion" = "main", "timeoutInMinutesOverride" = 60 }
+      suffix       = "sample"
     }
-  }
+  ]
   # -----------------------------------------
   # Do not change the teamid, prjid once set.
   teamid = var.teamid

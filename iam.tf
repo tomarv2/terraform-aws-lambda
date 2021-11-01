@@ -11,10 +11,6 @@ module "iam_role" {
   # Note: Do not change teamid and prjid once set.
   teamid = var.teamid
   prjid  = var.prjid
-
-  providers = {
-    aws = aws.iam-management
-  }
 }
 
 module "iam_role_existing" {
@@ -28,8 +24,4 @@ module "iam_role_existing" {
   # Note: Do not change teamid and prjid once set.
   teamid = var.teamid
   prjid  = var.prjid
-
-  providers = {
-    aws = aws.iam-management
-  }
 }

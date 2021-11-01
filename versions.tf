@@ -12,14 +12,3 @@ terraform {
     }
   }
 }
-
-provider "aws" {
-  region  = local.override_aws_region
-  profile = var.profile_to_use
-}
-
-provider "aws" {
-  alias   = "iam-management"
-  region  = local.override_aws_region
-  profile = var.profile_for_iam
-}

@@ -168,18 +168,10 @@ variable "file_system_local_mount_path" {
   default     = null
 }
 
-# Cloudwatch trigger
 variable "deploy_cloudwatch_event_trigger" {
   description = "deploy cloud watch event trigger"
-
-  type    = bool
-  default = false
-}
-
-variable "profile_for_iam" {
-  description = "profile to use for iam role creation."
-  default     = "default"
-  type        = string
+  type        = bool
+  default     = false
 }
 
 variable "policy_identifier" {
@@ -202,11 +194,7 @@ variable "dependencies_path" {
 
 variable "cloudwatch_event" {
   description = "Map of cloudwatch event configuration"
-  type        = map(any)
-  default = {
-    default = {}
-    default = {}
-  }
+  type        = any
 }
 
 variable "deploy_cloudwatch" {
@@ -215,14 +203,8 @@ variable "deploy_cloudwatch" {
   type        = bool
 }
 
-variable "aws_region" {
-  description = "aws region to deploy resources"
+variable "name" {
+  description = "Function name"
+  type        = string
   default     = null
-  type        = string
-}
-
-variable "profile_to_use" {
-  description = "Getting values from ~/.aws/credentials"
-  default     = "default"
-  type        = string
 }
