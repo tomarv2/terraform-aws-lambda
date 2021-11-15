@@ -1,7 +1,9 @@
 module "cloudwatch_event" {
   source = "git::git@github.com:tomarv2/terraform-aws-cloudwatch-event.git?ref=v0.0.5"
 
-  count = length(var.cloudwatch_event)
+  for_each = var.cloudwatch_event != null ? var.cloudwatch_event : {}
+
+  name         = var.name
 
   target_name  = var.name != null ? var.name : "${var.teamid}-${var.prjid}"
   name         = lookup(var.cloudwatch_event[count.index], "name", null)
@@ -21,10 +23,10 @@ module "cloudwatch_event" {
 }
 
 resource "aws_lambda_permission" "cloudwatch" {
-  count = length(var.cloudwatch_event)
+  for_each = var.cloudwatch_event != null ? var.cloudwatch_event : {}
 
   action        = "lambda:InvokeFunction"
-  function_name = join("", aws_lambda_function.lambda.*.arn)
+  function_name = aws_lambda_function.lambda[0].function_name
   principal     = "events.amazonaws.com"
   source_arn    = module.cloudwatch_event[count.index].cloudwatch_event_rule_arn
 }
