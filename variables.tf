@@ -208,3 +208,9 @@ variable "name" {
   type        = string
   default     = null
 }
+
+variable "deploy_role" {
+  description = "Controls whether resources should be created"
+  type        = bool
+  default     = true
+}
