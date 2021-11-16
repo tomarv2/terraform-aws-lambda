@@ -212,5 +212,5 @@ variable "name" {
 variable "deploy_role" {
   description = "Controls whether resources should be created"
   type        = bool
-  default     = true
+  default     = false
 }

@@ -22,6 +22,7 @@ else
 fi
 
 # Create and activate virtual environment...
+pip3 install virtualenv
 virtualenv -p $runtime env_$function_name || exit 3
 source env_$function_name/bin/activate || exit 4
 

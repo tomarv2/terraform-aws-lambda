@@ -315,7 +315,7 @@ Please refer to examples directory [link](examples) for references.
 | <a name="input_deploy_cloudwatch_event_trigger"></a> [deploy\_cloudwatch\_event\_trigger](#input\_deploy\_cloudwatch\_event\_trigger) | deploy cloud watch event trigger | `bool` | `false` | no |
 | <a name="input_deploy_lambda"></a> [deploy\_lambda](#input\_deploy\_lambda) | Controls whether resources should be created | `bool` | `true` | no |
 | <a name="input_deploy_layer"></a> [deploy\_layer](#input\_deploy\_layer) | Controls whether Lambda Layer resource should be created | `bool` | `false` | no |
-| <a name="input_deploy_role"></a> [deploy\_role](#input\_deploy\_role) | Controls whether resources should be created | `bool` | `true` | no |
+| <a name="input_deploy_role"></a> [deploy\_role](#input\_deploy\_role) | Controls whether resources should be created | `bool` | `false` | no |
 | <a name="input_description"></a> [description](#input\_description) | Description of what your Lambda Function does. | `string` | `""` | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | environment variables to pass to lambda. | <pre>object({<br>    variables = map(string)<br>  })</pre> | `null` | no |
 | <a name="input_exclude_files"></a> [exclude\_files](#input\_exclude\_files) | file(s) to exclude in directory from zipping | `list(any)` | `null` | no |
