@@ -161,20 +161,22 @@ module "lambda" {
   }
   # --------------------------------------------------
   deploy_cloudwatch_event_trigger = true
-  cloudwatch_event = {
-    project-alpha = {
-      description  = "alpha"
-      schedule     = "rate(2 days)"
-      custom_input = { "sourceVersion" = "main", "timeoutInMinutesOverride" = 66 }
-      suffix       = "alpha"
+  cloudwatch_event = [
+    {
+      name         = "demo"
+      description  = "demo: ${var.teamid}-${var.prjid}"
+      schedule     = "rate(1 day)"
+      custom_input = { "sourceVersion" = "dev", "timeoutInMinutesOverride" = 30 }
+      suffix       = "demo"
     },
-    project-beta = {
-      description  = "beta"
-      schedule     = "rate(3 days)"
-      custom_input = { "sourceVersion" = "main", "timeoutInMinutesOverride" = 770 }
-      suffix       = "beta"
+    {
+      name         = "sample"
+      description  = "sample: ${var.teamid}-${var.prjid}"
+      schedule     = "rate(2 days)"
+      custom_input = { "sourceVersion" = "main", "timeoutInMinutesOverride" = 60 }
+      suffix       = "sample"
     }
-  }
+  ]
   # -----------------------------------------
   # Do not change the teamid, prjid once set.
   teamid = var.teamid
@@ -281,7 +283,7 @@ Please refer to examples directory [link](examples) for references.
 |------|---------|
 | <a name="provider_archive"></a> [archive](#provider\_archive) | 2.2.0 |
 | <a name="provider_aws"></a> [aws](#provider\_aws) | 3.47.0 |
-| <a name="provider_null"></a> [null](#provider\_null) | 3.1.0 |
+| <a name="provider_external"></a> [external](#provider\_external) | n/a |
 
 ## Modules
 
@@ -289,8 +291,8 @@ Please refer to examples directory [link](examples) for references.
 |------|--------|---------|
 | <a name="module_cloudwatch"></a> [cloudwatch](#module\_cloudwatch) | git::git@github.com:tomarv2/terraform-aws-cloudwatch.git | v0.0.7 |
 | <a name="module_cloudwatch_event"></a> [cloudwatch\_event](#module\_cloudwatch\_event) | git::git@github.com:tomarv2/terraform-aws-cloudwatch-event.git | v0.0.5 |
-| <a name="module_iam_role"></a> [iam\_role](#module\_iam\_role) | git::git@github.com:tomarv2/terraform-aws-iam-role.git//modules/iam_role_instance | v0.0.5 |
-| <a name="module_iam_role_existing"></a> [iam\_role\_existing](#module\_iam\_role\_existing) | git::git@github.com:tomarv2/terraform-aws-iam-role.git//modules/iam_role_instance | v0.0.5 |
+| <a name="module_iam_role"></a> [iam\_role](#module\_iam\_role) | git::git@github.com:tomarv2/terraform-aws-iam-role.git//modules/iam_role_instance | v0.0.6 |
+| <a name="module_iam_role_existing"></a> [iam\_role\_existing](#module\_iam\_role\_existing) | git::git@github.com:tomarv2/terraform-aws-iam-role.git//modules/iam_role_instance | v0.0.6 |
 
 ## Resources
 
@@ -298,9 +300,9 @@ Please refer to examples directory [link](examples) for references.
 |------|------|
 | [aws_lambda_function.lambda](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_function) | resource |
 | [aws_lambda_permission.cloudwatch](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_permission) | resource |
-| [null_resource.install_python_dependencies](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
 | [archive_file.zip_dir](https://registry.terraform.io/providers/hashicorp/archive/latest/docs/data-sources/file) | data source |
 | [archive_file.zip_file](https://registry.terraform.io/providers/hashicorp/archive/latest/docs/data-sources/file) | data source |
+| [external_external.install_python_dependencies](https://registry.terraform.io/providers/hashicorp/external/latest/docs/data-sources/external) | data source |
 
 ## Inputs
 

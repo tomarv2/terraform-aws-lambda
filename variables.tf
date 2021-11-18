@@ -186,12 +186,6 @@ variable "runtime_dependencies" {
   default     = false
 }
 
-variable "dependencies_path" {
-  description = "Location of dependencies management script."
-  default     = null
-  type        = string
-}
-
 variable "cloudwatch_event" {
   description = "Map of cloudwatch event configuration"
   type        = any

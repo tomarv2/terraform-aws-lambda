@@ -14,5 +14,5 @@ data "archive_file" "zip_dir" {
   output_path = var.output_path
   excludes    = var.exclude_files
 
-  depends_on = [null_resource.install_python_dependencies]
+  depends_on = [data.external.install_python_dependencies]
 }
