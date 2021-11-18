@@ -30,3 +30,8 @@ repos:
     - id: checkov
       verbose: true
       args: [-d, '.', --framework, 'terraform']
+
+  - repo: git://github.com/pre-commit/pre-commit-hooks
+    rev: v3.4.0
+    hooks:
+      - id: check-merge-conflict

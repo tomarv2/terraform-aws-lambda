@@ -1,8 +1,8 @@
 module "iam_role" {
-  source = "git::git@github.com:tomarv2/terraform-aws-iam-role.git//modules/iam_role_instance?ref=v0.0.5"
+  source = "git::git@github.com:tomarv2/terraform-aws-iam-role.git//modules/iam_role_instance?ref=v0.0.6"
 
-  deploy_iam_role             = var.role != null ? false : true
-  deploy_iam_instance_profile = var.role != null ? false : true
+  deploy_iam_role             = var.deploy_lambda && var.deploy_role ? true : false
+  deploy_iam_instance_profile = var.deploy_lambda && var.deploy_role ? true : false
 
   role_type         = "Service"
   policy_identifier = var.policy_identifier
@@ -14,7 +14,7 @@ module "iam_role" {
 }
 
 module "iam_role_existing" {
-  source = "git::git@github.com:tomarv2/terraform-aws-iam-role.git//modules/iam_role_instance?ref=v0.0.5"
+  source = "git::git@github.com:tomarv2/terraform-aws-iam-role.git//modules/iam_role_instance?ref=v0.0.6"
 
   deploy_iam_role             = false
   deploy_iam_instance_profile = false
