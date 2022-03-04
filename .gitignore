@@ -208,7 +208,7 @@ dmypy.json
 
 # ignore test related file(s)
 **/test**
-**.
-
+**lambda-*-test**
+**/.
 # ignore terraform external modules
 **/.external_modules
