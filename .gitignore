@@ -82,13 +82,9 @@ _testmain.go
 # Python
 # Editors
 .vscode/
-.idea/
 
 # Vagrant
 .vagrant/
-
-# Mac/OSX
-.DS_Store
 
 # Windows
 Thumbs.db
@@ -98,9 +94,6 @@ Thumbs.db
 __pycache__/
 *.py[cod]
 *$py.class
-
-# C extensions
-*.so
 
 # Distribution / packaging
 .Python
@@ -206,9 +199,14 @@ venv.bak/
 .dmypy.json
 dmypy.json
 
-# ignore test related file(s)
-**/test**
-**lambda-*-test**
-**/.
-# ignore terraform external modules
+# Terraform external modules
 **/.external_modules
+
+# Test files and directories
+**/[Tt]est/*
+**/[Tt]ests/*
+**/*[Tt]est*/*
+**/*[Tt]ests*/*
+
+# remote_backend.tf file
+**/remote_backend.tf
