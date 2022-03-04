@@ -280,7 +280,7 @@ Please refer to examples directory [link](examples) for references.
 | Name | Version |
 |------|---------|
 | <a name="provider_archive"></a> [archive](#provider\_archive) | 2.2.0 |
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 3.47.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 3.63 |
 | <a name="provider_external"></a> [external](#provider\_external) | n/a |
 
 ## Modules
