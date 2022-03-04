@@ -9,8 +9,6 @@
         <img src="https://img.shields.io/github/commit-activity/m/tomarv2/terraform-aws-lambda" /></a>
     <a href="https://stackoverflow.com/users/6679867/tomarv2" alt="Stack Exchange reputation">
         <img src="https://img.shields.io/stackexchange/stackoverflow/r/6679867"></a>
-    <a href="https://discord.gg/XH975bzN" alt="chat on Discord">
-        <img src="https://img.shields.io/discord/813961944443912223?logo=discord"></a>
     <a href="https://twitter.com/intent/follow?screen_name=varuntomar2019" alt="follow on Twitter">
         <img src="https://img.shields.io/twitter/follow/varuntomar2019?style=social&logo=twitter"></a>
 </p>
@@ -20,7 +18,7 @@
 ## Versions
 
 - Module tested for Terraform 1.0.1.
-- AWS provider version [3.61](https://registry.terraform.io/providers/hashicorp/aws/latest).
+- AWS provider version [3.63](https://registry.terraform.io/providers/hashicorp/aws/latest).
 - `main` branch: Provider versions not pinned to keep up with Terraform releases.
 - `tags` releases: Tags are pinned with versions (use <a href="https://github.com/tomarv2/terraform-aws-lambda/tags" alt="GitHub tag">
         <img src="https://img.shields.io/github/v/tag/tomarv2/terraform-aws-lambda" /></a>).
@@ -313,7 +311,7 @@ Please refer to examples directory [link](examples) for references.
 | <a name="input_cloudwatch_path"></a> [cloudwatch\_path](#input\_cloudwatch\_path) | name of the log group | `string` | `"/aws/lambda"` | no |
 | <a name="input_dead_letter_config"></a> [dead\_letter\_config](#input\_dead\_letter\_config) | dead letter config. | <pre>object({<br>    target_arn = string<br>  })</pre> | `null` | no |
 | <a name="input_dependencies_path"></a> [dependencies\_path](#input\_dependencies\_path) | Location of dependencies management script. | `string` | `null` | no |
-| <a name="input_deploy_cloudwatch"></a> [deploy\_cloudwatch](#input\_deploy\_cloudwatch) | feature flag, true or false | `bool` | `true` | no |
+| <a name="input_deploy_cloudwatch"></a> [deploy\_cloudwatch](#input\_deploy\_cloudwatch) | Feature flag, true or false | `bool` | `true` | no |
 | <a name="input_deploy_cloudwatch_event_trigger"></a> [deploy\_cloudwatch\_event\_trigger](#input\_deploy\_cloudwatch\_event\_trigger) | deploy cloud watch event trigger | `bool` | `false` | no |
 | <a name="input_deploy_lambda"></a> [deploy\_lambda](#input\_deploy\_lambda) | Controls whether resources should be created | `bool` | `true` | no |
 | <a name="input_deploy_layer"></a> [deploy\_layer](#input\_deploy\_layer) | Controls whether Lambda Layer resource should be created | `bool` | `false` | no |
@@ -332,14 +330,14 @@ Please refer to examples directory [link](examples) for references.
 | <a name="input_output_path"></a> [output\_path](#input\_output\_path) | output file path on local machine to deploy to lambda | `string` | n/a | yes |
 | <a name="input_package_type"></a> [package\_type](#input\_package\_type) | The Lambda deployment package type. Valid options: Zip or Image | `string` | `"Zip"` | no |
 | <a name="input_policy_identifier"></a> [policy\_identifier](#input\_policy\_identifier) | iam policy identifier. | `list(string)` | <pre>[<br>  "lambda.amazonaws.com"<br>]</pre> | no |
-| <a name="input_prjid"></a> [prjid](#input\_prjid) | (Required) name of the project/stack e.g: mystack, nifieks, demoaci. Should not be changed after running 'tf apply' | `string` | n/a | yes |
+| <a name="input_prjid"></a> [prjid](#input\_prjid) | Name of the project/stack e.g: mystack, nifieks, demoaci. Should not be changed after running 'tf apply' | `string` | n/a | yes |
 | <a name="input_reserved_concurrent_executions"></a> [reserved\_concurrent\_executions](#input\_reserved\_concurrent\_executions) | reserved concurrent execution. | `number` | `null` | no |
 | <a name="input_role"></a> [role](#input\_role) | IAM role attached to the Lambda Function. This governs both who / what can invoke your Lambda Function, as well as what resources our Lambda Function has access to. | `string` | `null` | no |
 | <a name="input_runtime"></a> [runtime](#input\_runtime) | See Runtimes for valid values. | `string` | `""` | no |
 | <a name="input_runtime_dependencies"></a> [runtime\_dependencies](#input\_runtime\_dependencies) | feature flag install runtime dependencies. | `bool` | `false` | no |
 | <a name="input_source_dir"></a> [source\_dir](#input\_source\_dir) | input directory path on local machine to zip | `string` | `null` | no |
 | <a name="input_source_file"></a> [source\_file](#input\_source\_file) | input file path on local machine to zip | `string` | `null` | no |
-| <a name="input_teamid"></a> [teamid](#input\_teamid) | (Required) name of the team/group e.g. devops, dataengineering. Should not be changed after running 'tf apply' | `string` | n/a | yes |
+| <a name="input_teamid"></a> [teamid](#input\_teamid) | Name of the team/group e.g. devops, dataengineering. Should not be changed after running 'tf apply' | `string` | n/a | yes |
 | <a name="input_timeout"></a> [timeout](#input\_timeout) | The amount of time your Lambda Function has to run in seconds. Defaults to 3. | `number` | `30` | no |
 | <a name="input_tracing_config"></a> [tracing\_config](#input\_tracing\_config) | Tracing config. | <pre>object({<br>    mode = string<br>  })</pre> | <pre>{<br>  "mode": "PassThrough"<br>}</pre> | no |
 | <a name="input_vpc_config"></a> [vpc\_config](#input\_vpc\_config) | vpc config. | <pre>object({<br>    security_group_ids = list(string)<br>    subnet_ids         = list(string)<br>  })</pre> | `null` | no |

@@ -1,6 +1,6 @@
 repos:
   - repo: git://github.com/antonbabenko/pre-commit-terraform
-    rev: v1.48.0
+    rev: v1.60.0
     hooks:
       - id: terraform_fmt
       - id: terraform_tflint
@@ -17,7 +17,7 @@ repos:
           - '--args=--only=terraform_workspace_remote'
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v3.2.0
+    rev: v3.4.0
     hooks:
       - id: trailing-whitespace
       - id: check-merge-conflict
@@ -25,13 +25,8 @@ repos:
       - id: check-yaml
 
   - repo: https://github.com/bridgecrewio/checkov.git
-    rev: '2.0.531'
+    rev: '2.0.914'
     hooks:
     - id: checkov
       verbose: true
-      args: [-d, '.', --framework, 'terraform']
-
-  - repo: git://github.com/pre-commit/pre-commit-hooks
-    rev: v3.4.0
-    hooks:
-      - id: check-merge-conflict
+      args: [-d, '.', --framework, 'terraform', --skip-check, 'CKV_AWS_50,CKV_AWS_158', --download-external-modules, 'True']

@@ -23,15 +23,15 @@ def create_package():
             os.mkdir(pkg_dir)
 
         """Installing dependencies from requirements file"""
-        subprocess.check_call(["pip", "install", "-r", req_file, "--target", pkg_dir], stdout=DEVNULL, stderr=DEVNULL)
+        subprocess.check_call(['pip', 'install', '-r', req_file, '--target', pkg_dir], stdout=DEVNULL, stderr=DEVNULL)
 
         """Copying files to the temp folder"""
-        subprocess.check_call(["cp", "-r", source_code_path + '/.', pkg_dir], stdout=DEVNULL, stderr=DEVNULL)
+        subprocess.check_call(['cp', '-r', source_code_path + '/.', pkg_dir], stdout=DEVNULL, stderr=DEVNULL)
 
         sys.stdout.write(out)
     except ValueError as e:
         sys.exit(e)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     create_package()
