@@ -181,7 +181,7 @@ variable "policy_identifier" {
 }
 
 variable "runtime_dependencies" {
-  description = "feature flag install runtime dependencies."
+  description = "feature flag install runtime dependencies"
   type        = bool
   default     = false
 }
