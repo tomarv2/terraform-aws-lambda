@@ -259,28 +259,28 @@ Please refer to examples directory [link](examples) for references.
 | <a name="input_deploy_layer"></a> [deploy\_layer](#input\_deploy\_layer) | Controls whether Lambda Layer resource should be created | `bool` | `false` | no |
 | <a name="input_deploy_role"></a> [deploy\_role](#input\_deploy\_role) | Controls whether resources should be created | `bool` | `false` | no |
 | <a name="input_description"></a> [description](#input\_description) | Description of what your Lambda Function does. | `string` | `""` | no |
-| <a name="input_environment"></a> [environment](#input\_environment) | environment variables to pass to lambda. | <pre>object({<br>    variables = map(string)<br>  })</pre> | `null` | no |
+| <a name="input_environment"></a> [environment](#input\_environment) | environment variables to pass to lambda | <pre>object({<br>    variables = map(string)<br>  })</pre> | `null` | no |
 | <a name="input_exclude_files"></a> [exclude\_files](#input\_exclude\_files) | File(s) to exclude in directory from zipping | `list(any)` | `null` | no |
 | <a name="input_file_system_arn"></a> [file\_system\_arn](#input\_file\_system\_arn) | The Amazon Resource Name (ARN) of the Amazon EFS Access Point that provides access to the file system. | `string` | `null` | no |
 | <a name="input_file_system_local_mount_path"></a> [file\_system\_local\_mount\_path](#input\_file\_system\_local\_mount\_path) | The path where the function can access the file system, starting with /mnt/. | `string` | `null` | no |
-| <a name="input_handler"></a> [handler](#input\_handler) | The function entrypoint in your code. | `string` | n/a | yes |
+| <a name="input_handler"></a> [handler](#input\_handler) | The function entrypoint in your code | `string` | n/a | yes |
 | <a name="input_image_uri"></a> [image\_uri](#input\_image\_uri) | The ECR image URI containing the function's deployment package. | `string` | `null` | no |
 | <a name="input_kms_key_arn"></a> [kms\_key\_arn](#input\_kms\_key\_arn) | The ARN of KMS key to use by your Lambda Function | `string` | `null` | no |
 | <a name="input_layers"></a> [layers](#input\_layers) | lambda layers. | `list(string)` | `null` | no |
-| <a name="input_memory_size"></a> [memory\_size](#input\_memory\_size) | Amount of memory in MB your Lambda Function can use at runtime. Defaults to 128. | `number` | `128` | no |
+| <a name="input_memory_size"></a> [memory\_size](#input\_memory\_size) | Amount of memory in MB your Lambda Function can use at runtime. Defaults to 128 | `number` | `128` | no |
 | <a name="input_name"></a> [name](#input\_name) | Function name | `string` | `null` | no |
 | <a name="input_output_path"></a> [output\_path](#input\_output\_path) | Output file path on local machine to deploy to lambda | `string` | n/a | yes |
 | <a name="input_package_type"></a> [package\_type](#input\_package\_type) | The Lambda deployment package type. Valid options: Zip or Image | `string` | `"Zip"` | no |
 | <a name="input_policy_identifier"></a> [policy\_identifier](#input\_policy\_identifier) | iam policy identifier. | `list(string)` | <pre>[<br>  "lambda.amazonaws.com"<br>]</pre> | no |
 | <a name="input_prjid"></a> [prjid](#input\_prjid) | Name of the project/stack e.g: mystack, nifieks, demoaci. Should not be changed after running 'tf apply' | `string` | n/a | yes |
 | <a name="input_reserved_concurrent_executions"></a> [reserved\_concurrent\_executions](#input\_reserved\_concurrent\_executions) | reserved concurrent execution. | `number` | `null` | no |
-| <a name="input_role"></a> [role](#input\_role) | IAM role attached to the Lambda Function. This governs both who / what can invoke your Lambda Function, as well as what resources our Lambda Function has access to. | `string` | `null` | no |
-| <a name="input_runtime"></a> [runtime](#input\_runtime) | See Runtimes for valid values. | `string` | `""` | no |
+| <a name="input_role"></a> [role](#input\_role) | IAM role attached to the Lambda Function. This governs both who / what can invoke your Lambda Function, as well as what resources our Lambda Function has access | `string` | `null` | no |
+| <a name="input_runtime"></a> [runtime](#input\_runtime) | See Runtimes for valid values | `string` | `""` | no |
 | <a name="input_runtime_dependencies"></a> [runtime\_dependencies](#input\_runtime\_dependencies) | feature flag install runtime dependencies. | `bool` | `false` | no |
 | <a name="input_source_dir"></a> [source\_dir](#input\_source\_dir) | Input directory path on local machine to zip | `string` | `null` | no |
 | <a name="input_source_file"></a> [source\_file](#input\_source\_file) | Input file path on local machine to zip | `string` | `null` | no |
 | <a name="input_teamid"></a> [teamid](#input\_teamid) | Name of the team/group e.g. devops, dataengineering. Should not be changed after running 'tf apply' | `string` | n/a | yes |
-| <a name="input_timeout"></a> [timeout](#input\_timeout) | The amount of time your Lambda Function has to run in seconds. Defaults to 3. | `number` | `30` | no |
+| <a name="input_timeout"></a> [timeout](#input\_timeout) | The amount of time your Lambda Function has to run in seconds. Defaults to 3 | `number` | `30` | no |
 | <a name="input_tracing_config"></a> [tracing\_config](#input\_tracing\_config) | Tracing config. | <pre>object({<br>    mode = string<br>  })</pre> | <pre>{<br>  "mode": "PassThrough"<br>}</pre> | no |
 | <a name="input_vpc_config"></a> [vpc\_config](#input\_vpc\_config) | vpc config. | <pre>object({<br>    security_group_ids = list(string)<br>    subnet_ids         = list(string)<br>  })</pre> | `null` | no |
 
