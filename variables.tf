@@ -9,24 +9,24 @@ variable "prjid" {
 }
 
 variable "role" {
-  description = "IAM role attached to the Lambda Function. This governs both who / what can invoke your Lambda Function, as well as what resources our Lambda Function has access to."
+  description = "IAM role attached to the Lambda Function. This governs both who / what can invoke your Lambda Function, as well as what resources our Lambda Function has access"
   default     = null
   type        = string
 }
 
 variable "handler" {
-  description = "The function entrypoint in your code."
+  description = "The function entrypoint in your code"
   type        = string
 }
 
 variable "runtime" {
   default     = ""
-  description = "See Runtimes for valid values."
+  description = "See Runtimes for valid values"
   type        = string
 }
 
 variable "environment" {
-  description = "environment variables to pass to lambda."
+  description = "environment variables to pass to lambda"
   type = object({
     variables = map(string)
   })
@@ -35,14 +35,14 @@ variable "environment" {
 
 variable "memory_size" {
   default     = 128
-  description = "Amount of memory in MB your Lambda Function can use at runtime. Defaults to 128."
+  description = "Amount of memory in MB your Lambda Function can use at runtime. Defaults to 128"
   type        = number
 
 }
 
 variable "timeout" {
   default     = 30
-  description = "The amount of time your Lambda Function has to run in seconds. Defaults to 3."
+  description = "The amount of time your Lambda Function has to run in seconds. Defaults to 3"
   type        = number
 }
 
@@ -181,7 +181,7 @@ variable "policy_identifier" {
 }
 
 variable "runtime_dependencies" {
-  description = "feature flag install runtime dependencies."
+  description = "feature flag install runtime dependencies"
   type        = bool
   default     = false
 }
