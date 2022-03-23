@@ -1,5 +1,14 @@
+terraform {
+  required_version = ">= 1.0.1"
+  required_providers {
+    aws = {
+      version = "~> 3.74"
+    }
+  }
+}
+
 provider "aws" {
-  region = "us-west-2"
+  region = var.region
 }
 
 module "global" {
@@ -18,13 +27,13 @@ module "lambda" {
   # - existing `role`
   # - `profile_for_iam` and `policy_identifier` (to handle the case where deployment account does not have permission to manage IAM)
   role = "arn:aws:iam::123456789012:role/demo-role"
-  #profile_for_iam = "iam-admin"
-  #policy_identifier      = ["events.amazonaws.com", "cloudwatch.amazonaws.com", "lambda.amazonaws.com"]
+  #profile_for_iam    = "iam-admin"
+  #policy_identifier  = ["events.amazonaws.com", "cloudwatch.amazonaws.com", "lambda.amazonaws.com"]
 
   # NOTE: One of the below is required:
   # - `source_file`
   # - `source_dir` and/or `exclude_files` and/or `runtime_dependencies`
-  #source_file      = "lambda_function.py"
+  #source_file         = "lambda_function.py"
   source_dir           = "demo_lambda"
   exclude_files        = ["exclude_file.txt"]
   runtime_dependencies = true
@@ -51,9 +60,8 @@ module "lambda" {
 }
 
 module "security_group" {
-  source = "git::git@github.com:tomarv2/terraform-aws-security-group.git?ref=v0.0.2"
+  source = "git::git@github.com:tomarv2/terraform-aws-security-group.git?ref=v0.0.9"
 
-  account_id = "123456789012"
   security_group_ingress = {
     default = {
       description = "https"

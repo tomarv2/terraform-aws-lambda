@@ -29,6 +29,7 @@ override.tf.json
 # example: *tfplan*
 
 .idea/
+.vscode/
 .terraform.lock.hcl
 
 # go
@@ -81,7 +82,6 @@ _testmain.go
 
 # Python
 # Editors
-.vscode/
 
 # Vagrant
 .vagrant/
