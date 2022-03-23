@@ -206,6 +206,8 @@ module "security_group" {
 
 Please refer to examples directory [link](examples) for references.
 
+
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
@@ -220,8 +222,8 @@ Please refer to examples directory [link](examples) for references.
 
 | Name | Version |
 |------|---------|
-| <a name="provider_archive"></a> [archive](#provider\_archive) | 2.2.0 |
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 3.63 |
+| <a name="provider_archive"></a> [archive](#provider\_archive) | >= 2.1 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | ~> 3.74 |
 | <a name="provider_external"></a> [external](#provider\_external) | >= 2.1.0 |
 
 ## Modules
@@ -229,7 +231,7 @@ Please refer to examples directory [link](examples) for references.
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_cloudwatch"></a> [cloudwatch](#module\_cloudwatch) | git::git@github.com:tomarv2/terraform-aws-cloudwatch.git | v0.0.7 |
-| <a name="module_cloudwatch_event"></a> [cloudwatch\_event](#module\_cloudwatch\_event) | ../../../../personal_github/repos-management/aws/terraform-aws-cloudwatch-events | n/a |
+| <a name="module_cloudwatch_event"></a> [cloudwatch\_event](#module\_cloudwatch\_event) | git::git@github.com:tomarv2/terraform-aws-cloudwatch-event.git | v0.0.10 |
 | <a name="module_iam_role"></a> [iam\_role](#module\_iam\_role) | git::git@github.com:tomarv2/terraform-aws-iam-role.git//modules/iam_role_instance | v0.0.11 |
 | <a name="module_iam_role_existing"></a> [iam\_role\_existing](#module\_iam\_role\_existing) | git::git@github.com:tomarv2/terraform-aws-iam-role.git//modules/iam_role_instance | v0.0.11 |
 
@@ -295,3 +297,4 @@ Please refer to examples directory [link](examples) for references.
 | <a name="output_output_dir_size"></a> [output\_dir\_size](#output\_output\_dir\_size) | Output dir path size |
 | <a name="output_output_file_path"></a> [output\_file\_path](#output\_output\_file\_path) | Output file path location |
 | <a name="output_output_file_size"></a> [output\_file\_size](#output\_output\_file\_size) | Output file path size |
+<!-- END_TF_DOCS -->

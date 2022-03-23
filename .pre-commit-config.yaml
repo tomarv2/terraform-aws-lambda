@@ -1,4 +1,11 @@
 repos:
+  - repo: https://github.com/terraform-docs/terraform-docs
+    rev: "v0.16.0"
+    hooks:
+      - id: terraform-docs-go
+        args: [ "markdown", "table", "--output-file", "README.md", "." ]
+
+
   - repo: https://github.com/antonbabenko/pre-commit-terraform
     rev: v1.60.0
     hooks:
@@ -29,4 +36,4 @@ repos:
     hooks:
     - id: checkov
       verbose: true
-      args: [-d, '.', --framework, 'terraform', --skip-check, 'CKV_AWS_50,CKV_AWS_158', --download-external-modules, 'True']
+      args: [-d, '.', --framework, 'terraform', --skip-check, 'CKV2_AWS_5,CKV_AWS_50,CKV_AWS_158', --download-external-modules, 'True']
