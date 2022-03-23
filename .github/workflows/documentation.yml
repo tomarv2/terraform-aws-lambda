@@ -1,10 +1,7 @@
 name: Generate terraform docs
-on:
-  push:
-    branches: [main, develop]
-  pull_request:
-    branches: [main]
 
+on:
+  - pull_request
 jobs:
   docs:
     runs-on: ubuntu-latest
@@ -13,8 +10,8 @@ jobs:
       with:
         ref: ${{ github.event.pull_request.head.ref }}
 
-    - name: Render terraform docs and push changes back to PR
-      uses: terraform-docs/gh-actions@main
+    - name: Render terraform docs inside the README.md and push changes back to PR branch
+      uses: terraform-docs/gh-actions@v0.11.0
       with:
         working-dir: .
         output-file: README.md
