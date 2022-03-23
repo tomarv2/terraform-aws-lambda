@@ -53,24 +53,24 @@ variable "description" {
 }
 
 variable "source_file" {
-  description = "input file path on local machine to zip"
+  description = "Input file path on local machine to zip"
   default     = null
   type        = string
 }
 
 variable "source_dir" {
-  description = "input directory path on local machine to zip"
+  description = "Input directory path on local machine to zip"
   default     = null
   type        = string
 }
 
 variable "output_path" {
-  description = "output file path on local machine to deploy to lambda"
+  description = "Output file path on local machine to deploy to lambda"
   type        = string
 }
 
 variable "exclude_files" {
-  description = "file(s) to exclude in directory from zipping"
+  description = "File(s) to exclude in directory from zipping"
   default     = null
   type        = list(any)
 }
@@ -189,6 +189,7 @@ variable "runtime_dependencies" {
 variable "cloudwatch_event" {
   description = "Map of cloudwatch event configuration"
   type        = any
+  default     = {}
 }
 
 variable "deploy_cloudwatch" {

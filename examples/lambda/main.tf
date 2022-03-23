@@ -1,5 +1,14 @@
+terraform {
+  required_version = ">= 1.0.1"
+  required_providers {
+    aws = {
+      version = "~> 3.74"
+    }
+  }
+}
+
 provider "aws" {
-  region = "us-west-2"
+  region = var.region
 }
 
 module "lambda" {
@@ -9,8 +18,8 @@ module "lambda" {
   # - existing `role`
   # - `profile_for_iam` and `policy_identifier` (to handle the case where deployment account does not have permission to manage IAM)
   role = "arn:aws:iam::123456789012:role/demo-role"
-  #profile_for_iam = "iam-admin"
-  #policy_identifier      = ["events.amazonaws.com", "cloudwatch.amazonaws.com", "lambda.amazonaws.com"]
+  #profile_for_iam      = "iam-admin"
+  #policy_identifier    = ["events.amazonaws.com", "cloudwatch.amazonaws.com", "lambda.amazonaws.com"]
 
   # NOTE: One of the below is required:
   # - `source_file`
