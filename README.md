@@ -276,7 +276,7 @@ Please refer to examples directory [link](examples) for references.
 | <a name="input_reserved_concurrent_executions"></a> [reserved\_concurrent\_executions](#input\_reserved\_concurrent\_executions) | reserved concurrent execution. | `number` | `null` | no |
 | <a name="input_role"></a> [role](#input\_role) | IAM role attached to the Lambda Function. This governs both who / what can invoke your Lambda Function, as well as what resources our Lambda Function has access | `string` | `null` | no |
 | <a name="input_runtime"></a> [runtime](#input\_runtime) | See Runtimes for valid values | `string` | `""` | no |
-| <a name="input_runtime_dependencies"></a> [runtime\_dependencies](#input\_runtime\_dependencies) | feature flag install runtime dependencies. | `bool` | `false` | no |
+| <a name="input_runtime_dependencies"></a> [runtime\_dependencies](#input\_runtime\_dependencies) | feature flag install runtime dependencies | `bool` | `false` | no |
 | <a name="input_source_dir"></a> [source\_dir](#input\_source\_dir) | Input directory path on local machine to zip | `string` | `null` | no |
 | <a name="input_source_file"></a> [source\_file](#input\_source\_file) | Input file path on local machine to zip | `string` | `null` | no |
 | <a name="input_teamid"></a> [teamid](#input\_teamid) | Name of the team/group e.g. devops, dataengineering. Should not be changed after running 'tf apply' | `string` | n/a | yes |
