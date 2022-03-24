@@ -116,37 +116,12 @@ jobs:
         run: |
           pre-commit run --color=always --show-diff-on-failure --all-files
 
-      - uses: actions/checkout@v3
-      - name: Create commits
+      - uses: actions/checkout@v2
+      - name: Create report file
+        run: date +%s > report1.txt
+      - name: Commit report
         run: |
-          git config user.name 'Peter Evans'
-          git config user.email 'tomarv2@users.noreply.github.com'
-          date +%s > report.txt
-          git commit -am "Modify tracked file during workflow"
-          date +%s > new-report.txt
-          git add -A
-          git commit -m "Add untracked file during workflow"
-#          git config --global user.email "${GITHUB_ACTOR}"
-#          git config --global user.name "${GITHUB_ACTOR}@users.noreply.github.com"
-#          git status
-#          git pull
-#          git checkout "$DEFAULT_BRANCH"
-#          git status
-#          git checkout "$GITHUB_HEAD_REF"
-#          git merge "$DEFAULT_BRANCH" --no-edit
-#          git push
-#          git status
-#
-#      - uses: actions/checkout@v3
-#
-#      - name: Make changes to pull request
-#        run: date +%s > report.txt
-#
-#      - name: Create Pull Request
-#        id: cpr
-#        uses: peter-evans/create-pull-request@v4
-#        with:
-#          token: ${{ secrets.GITHUB_TOKEN }}
-#          signoff: false
-#          branch: main
-#          title: '[Example] Update report'
+          git config --global user.name 'tomarv2'
+          git config --global user.email 'tomarv2@users.noreply.github.com'
+          git commit -am "Automated report"
+          git push
