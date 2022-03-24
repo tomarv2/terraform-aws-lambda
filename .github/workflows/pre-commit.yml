@@ -126,7 +126,7 @@ jobs:
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
           signoff: false
           delete-branch: false
-          title: '[Example] Update report'
+          title: '[Automated] Push'
           body: |
             Update report
             - Updated with *today's* date
