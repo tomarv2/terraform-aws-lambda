@@ -1,7 +1,7 @@
-	name: Generate terraform docs	
+name: Generate terraform docs
 on:	
-#  push:	
-#    branches: [main, develop]	
+  push:
+    branches: [main, develop]
   pull_request:	
     branches: [main]	
 jobs:	
