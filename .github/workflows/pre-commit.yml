@@ -125,7 +125,7 @@ jobs:
           committer: GitHub <noreply@github.com>
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
           signoff: false
-          base: main
+#          base: main
           title: '[Automated] pre commit changes'
           body: |
             Changes suggested by pre-commit
