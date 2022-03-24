@@ -122,7 +122,6 @@ jobs:
           echo ::set-output name=branch_name::${GITHUB_REF##*/}
 
       - name: Commit files
-        uses: actions/checkout@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
         run: |
