@@ -1,8 +1,8 @@
 name: ci
 
 on:
-#  pull_request:
-#    branches: [main]
+  pull_request:
+    branches: [main]
   push:
     branches: [main, develop]
 
@@ -21,6 +21,5 @@ jobs:
         with:
           working-dir: .
           output-file: README.md
-          config-file: .terraform-docs.yml
           git-push: "true"
           output-method: inject
