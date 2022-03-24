@@ -21,12 +21,12 @@ jobs:
         with:
           output-file: USAGE.md
           template: |-
-            <!-- BEGIN_TF_DOCS -->
+            <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
             # Test tf11 basic
             ## Verify
             Should use the template defined instead of the default
             Should inject the table under usage
             # Usage
             {{ .Content }}
-            <!-- END_TF_DOCS -->
+            <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
           indention: 3
