@@ -17,6 +17,7 @@ jobs:
           ref: ${{ github.event.pull_request.head.ref }}
 
       - name: Should generate USAGE.md for tf11_basic
+        uses: terraform-docs/gh-actions
         with:
           output-file: USAGE.md
           template: |-
