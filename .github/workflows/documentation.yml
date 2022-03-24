@@ -21,3 +21,5 @@ jobs:
         with:
           output-file: README.md
           config-file: .terraform-docs.yml
+          git-push: "true"
+          output-method: inject
