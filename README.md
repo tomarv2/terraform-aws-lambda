@@ -206,8 +206,7 @@ module "security_group" {
 
 Please refer to examples directory [link](examples) for references.
 
-
-<!-- BEGIN_TF_DOCS -->
+<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
 
 | Name | Version |
@@ -297,4 +296,4 @@ Please refer to examples directory [link](examples) for references.
 | <a name="output_output_dir_size"></a> [output\_dir\_size](#output\_output\_dir\_size) | Output dir path size |
 | <a name="output_output_file_path"></a> [output\_file\_path](#output\_output\_file\_path) | Output file path location |
 | <a name="output_output_file_size"></a> [output\_file\_size](#output\_output\_file\_size) | Output file path size |
-<!-- END_TF_DOCS -->
+<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
