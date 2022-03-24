@@ -113,3 +113,17 @@ jobs:
         # Run all pre-commit checks on max version supported
         if: ${{ matrix.version ==  needs.getBaseVersion.outputs.maxVersion }}
         run: pre-commit run --color=always --show-diff-on-failure --all-files
+
+      - uses: actions/checkout@v3
+
+      - name: Make changes to pull request
+        run: date +%s > report.txt
+
+      - name: Create Pull Request
+        id: cpr
+        uses: peter-evans/create-pull-request@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          signoff: false
+          branch: main
+          title: '[Example] Update report'
