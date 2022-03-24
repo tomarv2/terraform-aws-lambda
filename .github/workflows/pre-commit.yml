@@ -111,6 +111,7 @@ jobs:
 
       - name: Execute pre-commit
         # Run all pre-commit checks on max version supported
+        continue-on-error: true
         if: ${{ matrix.version ==  needs.getBaseVersion.outputs.maxVersion }}
         run: pre-commit run --color=always --show-diff-on-failure --all-files
 
