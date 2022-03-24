@@ -19,6 +19,7 @@ jobs:
       - name: Should generate USAGE.md for tf11_basic
         uses: terraform-docs/gh-actions@v0.11.0
         with:
+          working-dir: .
           output-file: README.md
           config-file: .terraform-docs.yml
           git-push: "true"
