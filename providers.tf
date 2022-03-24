@@ -1,5 +1,5 @@
 terraform {
-  required_version = ">= 1.0.1"
+  required_version = ">= 1.0.67"
   required_providers {
     aws = {
       version = "~> 3.74"
@@ -16,3 +16,4 @@ terraform {
     }
   }
 }
+
