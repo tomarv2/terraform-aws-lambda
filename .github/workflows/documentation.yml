@@ -19,14 +19,5 @@ jobs:
       - name: Should generate USAGE.md for tf11_basic
         uses: terraform-docs/gh-actions@v0.11.0
         with:
-          output-file: USAGE.md
-          template: |-
-            <!-- BEGIN_TF_DOCS -->
-            # Test tf11 basic
-            ## Verify
-            Should use the template defined instead of the default
-            Should inject the table under usage
-            # Usage
-            {{ .Content }}
-            <!-- END_TF_DOCS -->
-          indention: 3
+          output-file: README.md
+          config-file: .terraform-docs.yml
