@@ -1,25 +1,22 @@
-name: ci
+name: Generate terraform docs
 
 on:
-  pull_request:
-    branches: [main]
   push:
     branches: [main, develop]
-
+  pull_request:
+    branches: [main]
 jobs:
-  build:
+  docs:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-          ref: ${{ github.event.pull_request.head.ref }}
+    - uses: actions/checkout@v2
+      with:
+        ref: ${{ github.event.pull_request.head.ref }}
 
-      - name: Should generate USAGE.md for tf11_basic
-        uses: terraform-docs/gh-actions@v0.11.0
-        with:
-          working-dir: .
-          output-file: README.md
-          git-push: "true"
-          output-method: inject
+    - name: Render terraform docs inside the README.md and push changes back to PR branch
+      uses: terraform-docs/gh-actions@v0.11.0
+      with:
+        working-dir: .
+        output-file: README.md
+        output-method: inject
+        git-push: "true"
