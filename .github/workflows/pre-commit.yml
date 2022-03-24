@@ -116,20 +116,28 @@ jobs:
         run: |
           pre-commit run --color=always --show-diff-on-failure --all-files
 
-      - name: Create Pull Request
-        id: create_pr
-        uses: peter-evans/create-pull-request@v4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: Update report
-          committer: GitHub <noreply@github.com>
-          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
-          signoff: false
-          delete-branch: false
-          branch: develop
-          base: main
-          title: '[Automated] pre commit changes'
-          body: |
-            Changes suggested by pre-commit
-          labels: |
-            automated pr
+      - name: Commit files
+        run: |
+          git add -A .
+          git config --local user.email "terraform+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git commit -m "Add changes"
+          git push
+
+#      - name: Create Pull Request
+#        id: create_pr
+#        uses: peter-evans/create-pull-request@v4
+#        with:
+#          token: ${{ secrets.GITHUB_TOKEN }}
+#          commit-message: Update report
+#          committer: GitHub <noreply@github.com>
+#          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+#          signoff: false
+#          delete-branch: false
+#          branch: develop
+#          base: main
+#          title: '[Automated] pre commit changes'
+#          body: |
+#            Changes suggested by pre-commit
+#          labels: |
+#            automated pr
