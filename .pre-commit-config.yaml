@@ -28,10 +28,10 @@ repos:
       - id: check-merge-conflict
       - id: end-of-file-fixer
       - id: check-yaml
-
-  - repo: https://github.com/bridgecrewio/checkov.git
-    rev: '2.0.914'
-    hooks:
-    - id: checkov
-      verbose: true
-      args: [-d, '.', --framework, 'terraform', --skip-check, 'CKV2_AWS_5,CKV_AWS_50,CKV_AWS_158', --download-external-modules, 'True']
+#
+#  - repo: https://github.com/bridgecrewio/checkov.git
+#    rev: '2.0.914'
+#    hooks:
+#    - id: checkov
+#      verbose: true
+#      args: [-d, '.', --framework, 'terraform', --skip-check, 'CKV2_AWS_5,CKV_AWS_50,CKV_AWS_158', --download-external-modules, 'True']
