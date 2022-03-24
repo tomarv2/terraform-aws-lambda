@@ -6,20 +6,18 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    if: "!contains(github.event.head_commit.message, '[ci skip]')"
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
         with:
-          fetch-depth: 0
           ref: ${{ github.event.pull_request.head.ref }}
-          repository: ${{ github.event.pull_request.head.repo.full_name }}
 
-      - name: Should generate USAGE.md for tf11_basic
-        uses: ./
+      - name: Render terraform docs inside the README.md and push changes back to PR branch
+        uses: terraform-docs/gh-actions@v0.11.0
         with:
-          working-dir: examples/tf11_basic
-          output-file: USAGE.md
+          working-dir: .
+          output-file: README.md
+          output-method: inject
+          git-push: "true"
           template: |-
             <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
             {{ .Content }}
