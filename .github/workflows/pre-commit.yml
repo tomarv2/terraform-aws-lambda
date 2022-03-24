@@ -122,6 +122,8 @@ jobs:
           echo ::set-output name=branch_name::${GITHUB_REF##*/}
 
       - name: Commit files
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git pull
           git add -A .
