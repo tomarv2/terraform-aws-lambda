@@ -1,444 +1,218 @@
-# terraform-docs
+<p align="center">
+    <a href="https://github.com/tomarv2/terraform-aws-lambda/actions/workflows/pre-commit.yml" alt="Pre Commit">
+        <img src="https://github.com/tomarv2/terraform-aws-lambda/actions/workflows/pre-commit.yml/badge.svg?branch=main" /></a>
+    <a href="https://www.apache.org/licenses/LICENSE-2.0" alt="license">
+        <img src="https://img.shields.io/github/license/tomarv2/terraform-aws-lambda" /></a>
+    <a href="https://github.com/tomarv2/terraform-aws-lambda/tags" alt="GitHub tag">
+        <img src="https://img.shields.io/github/v/tag/tomarv2/terraform-aws-lambda" /></a>
+    <a href="https://github.com/tomarv2/terraform-aws-lambda/pulse" alt="Activity">
+        <img src="https://img.shields.io/github/commit-activity/m/tomarv2/terraform-aws-lambda" /></a>
+    <a href="https://stackoverflow.com/users/6679867/tomarv2" alt="Stack Exchange reputation">
+        <img src="https://img.shields.io/stackexchange/stackoverflow/r/6679867"></a>
+    <a href="https://twitter.com/intent/follow?screen_name=varuntomar2019" alt="follow on Twitter">
+        <img src="https://img.shields.io/twitter/follow/varuntomar2019?style=social&logo=twitter"></a>
+</p>
 
-[![Build Status](https://github.com/terraform-docs/terraform-docs/workflows/ci/badge.svg)](https://github.com/terraform-docs/terraform-docs/actions) [![GoDoc](https://pkg.go.dev/badge/github.com/terraform-docs/terraform-docs)](https://pkg.go.dev/github.com/terraform-docs/terraform-docs) [![Go Report Card](https://goreportcard.com/badge/github.com/terraform-docs/terraform-docs)](https://goreportcard.com/report/github.com/terraform-docs/terraform-docs) [![Codecov Report](https://codecov.io/gh/terraform-docs/terraform-docs/branch/master/graph/badge.svg)](https://codecov.io/gh/terraform-docs/terraform-docs) [![License](https://img.shields.io/github/license/terraform-docs/terraform-docs)](https://github.com/terraform-docs/terraform-docs/blob/master/LICENSE) [![Latest release](https://img.shields.io/github/v/release/terraform-docs/terraform-docs)](https://github.com/terraform-docs/terraform-docs/releases)
+## Terraform module for [AWS Lambda](https://registry.terraform.io/modules/tomarv2/lambda/aws/latest)
 
-![terraform-docs-teaser](./images/terraform-docs-teaser.png)
+### Versions
 
-Sponsored by [Scalr - Terraform Automation & Collaboration Software](https://scalr.com/?utm_source=terraform-docs)
+- Module tested for Terraform 1.0.1.
+- AWS provider version [3.74](https://registry.terraform.io/providers/hashicorp/aws/latest).
+- `main` branch: Provider versions not pinned to keep up with Terraform releases.
+- `tags` releases: Tags are pinned with versions (use <a href="https://github.com/tomarv2/terraform-aws-lambda/tags" alt="GitHub tag">
+        <img src="https://img.shields.io/github/v/tag/tomarv2/terraform-aws-lambda" /></a>).
 
-<a href="https://www.scalr.com/?utm_source=terraform-docs" target="_blank"><img src="https://bit.ly/2T7Qm3U" alt="Scalr - Terraform Automation & Collaboration Software" width="175" height="40" /></a>
 
-## What is terraform-docs
+### Usage
 
-A utility to generate documentation from Terraform modules in various output formats.
+#### Option 1:
 
-## Installation
+```
+terrafrom init
+terraform plan -var='teamid=tryme' -var='prjid=project1'
+terraform apply -var='teamid=tryme' -var='prjid=project1'
+terraform destroy -var='teamid=tryme' -var='prjid=project1'
+```
+**Note:** With this option please take care of remote state storage
 
-macOS users can install using [Homebrew]:
+#### Option 2:
 
-```bash
-brew install terraform-docs
+##### Recommended method (stores remote state in S3 using `prjid` and `teamid` to create directory structure):
+
+- Create python 3.8+ virtual environment
+```
+python3 -m venv <venv name>
+```
+
+- Install package:
+```
+pip install tfremote --upgrade
+```
+
+- Set below environment variables:
+```
+export TF_AWS_BUCKET=<remote state bucket name>
+export TF_AWS_BUCKET_REGION=us-west-2
+export TF_AWS_PROFILE=<profile from ~/.ws/credentials>
 ```
 
 or
 
-```bash
-brew install terraform-docs/tap/terraform-docs
+- Set below environment variables:
+```
+export TF_AWS_BUCKET=<remote state bucket name>
+export TF_AWS_BUCKET_REGION=us-west-2
+export AWS_ACCESS_KEY_ID=<aws_access_key_id>
+export AWS_SECRET_ACCESS_KEY=<aws_secret_access_key>
 ```
 
-Windows users can install using [Scoop]:
+- Updated `examples` directory with required values.
 
-```bash
-scoop bucket add terraform-docs https://github.com/terraform-docs/scoop-bucket
-scoop install terraform-docs
+- Run and verify the output before deploying:
+```
+tf -c=aws plan -var='teamid=foo' -var='prjid=bar'
 ```
 
-or [Chocolatey]:
-
-```bash
-choco install terraform-docs
+- Run below to deploy:
+```
+tf -c=aws apply -var='teamid=foo' -var='prjid=bar'
 ```
 
-Stable binaries are also available on the [releases] page. To install, download the
-binary for your platform from "Assets" and place this into your `$PATH`:
-
-```bash
-curl -Lo ./terraform-docs.tar.gz https://github.com/terraform-docs/terraform-docs/releases/download/v0.16.0/terraform-docs-v0.16.0-$(uname)-amd64.tar.gz
-tar -xzf terraform-docs.tar.gz
-chmod +x terraform-docs
-mv terraform-docs /usr/local/terraform-docs
+- Run below to destroy:
+```
+tf -c=aws destroy -var='teamid=foo' -var='prjid=bar'
 ```
 
-**NOTE:** Windows releases are in `ZIP` format.
+**Note:** Read more on [tfremote](https://github.com/tomarv2/tfremote)
 
-The latest version can be installed using `go install` or `go get`:
-
-```bash
-# go1.17+
-go install github.com/terraform-docs/terraform-docs@v0.16.0
+### Lambda
 ```
-
-```bash
-# go1.16
-GO111MODULE="on" go get github.com/terraform-docs/terraform-docs@v0.16.0
-```
-
-**NOTE:** please use the latest Go to do this, minimum `go1.16` is required.
-
-This will put `terraform-docs` in `$(go env GOPATH)/bin`. If you encounter the error
-`terraform-docs: command not found` after installation then you may need to either add
-that directory to your `$PATH` as shown [here] or do a manual installation by cloning
-the repo and run `make build` from the repository which will put `terraform-docs` in:
-
-```bash
-$(go env GOPATH)/src/github.com/terraform-docs/terraform-docs/bin/$(uname | tr '[:upper:]' '[:lower:]')-amd64/terraform-docs
-```
-
-## Usage
-
-### Running the binary directly
-
-To run and generate documentation into README within a directory:
-
-```bash
-terraform-docs markdown table --output-file README.md --output-mode inject /path/to/module
-```
-
-Check [`output`] configuration for more details and examples.
-
-### Using docker
-
-terraform-docs can be run as a container by mounting a directory with `.tf`
-files in it and run the following command:
-
-```bash
-docker run --rm --volume "$(pwd):/terraform-docs" -u $(id -u) quay.io/terraform-docs/terraform-docs:0.16.0 markdown /terraform-docs
-```
-
-If `output.file` is not enabled for this module, generated output can be redirected
-back to a file:
-
-```bash
-docker run --rm --volume "$(pwd):/terraform-docs" -u $(id -u) quay.io/terraform-docs/terraform-docs:0.16.0 markdown /terraform-docs > doc.md
-```
-
-**NOTE:** Docker tag `latest` refers to _latest_ stable released version and `edge`
-refers to HEAD of `master` at any given point in time.
-
-### Using GitHub Actions
-
-To use terraform-docs GitHub Action, configure a YAML workflow file (e.g.
-`.github/workflows/documentation.yml`) with the following:
-
-```yaml
-name: Generate terraform docs
-on:
-  - pull_request
-
-jobs:
-  docs:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        ref: ${{ github.event.pull_request.head.ref }}
-
-    - name: Render terraform docs and push changes back to PR
-      uses: terraform-docs/gh-actions@main
-      with:
-        working-dir: .
-        output-file: README.md
-        output-method: inject
-        git-push: "true"
-```
-
-Read more about [terraform-docs GitHub Action] and its configuration and
-examples.
-
-### pre-commit hook
-
-With pre-commit, you can ensure your Terraform module documentation is kept
-up-to-date each time you make a commit.
-
-First [install pre-commit] and then create or update a `.pre-commit-config.yaml`
-in the root of your Git repo with at least the following content:
-
-```yaml
-repos:
-  - repo: https://github.com/terraform-docs/terraform-docs
-    rev: "v0.16.0"
-    hooks:
-      - id: terraform-docs-go
-        args: ["markdown", "table", "--output-file", "README.md", "./mymodule/path"]
-```
-
-Then run:
-
-```bash
-pre-commit install
-pre-commit install-hooks
-```
-
-Further changes to your module's `.tf` files will cause an update to documentation
-when you make a commit.
-
-## Configuration
-
-terraform-docs can be configured with a yaml file. The default name of this file is
-`.terraform-docs.yml` and the path order for locating it is:
-
-1. root of module directory
-1. `.config/` folder at root of module directory
-1. current directory
-1. `.config/` folder at current directory
-1. `$HOME/.tfdocs.d/`
-
-```yaml
-formatter: "" # this is required
-
-version: ""
-
-header-from: main.tf
-footer-from: ""
-
-recursive:
-  enabled: false
-  path: modules
-
-sections:
-  hide: []
-  show: []
-
-content: ""
-
-output:
-  file: ""
-  mode: inject
-  template: |-
-    <!-- BEGIN_TF_DOCS -->
-    {{ .Content }}
-    <!-- END_TF_DOCS -->
-
-output-values:
-  enabled: false
-  from: ""
-
-sort:
-  enabled: true
-  by: name
-
-settings:
-  anchor: true
-  color: true
-  default: true
-  description: false
-  escape: true
-  hide-empty: false
-  html: true
-  indent: 2
-  lockfile: true
-  read-comments: true
-  required: true
-  sensitive: true
-  type: true
-```
-
-## Content Template
-
-Generated content can be customized further away with `content` in configuration.
-If the `content` is empty the default order of sections is used.
-
-Compatible formatters for customized content are `asciidoc` and `markdown`. `content`
-will be ignored for other formatters.
-
-`content` is a Go template with following additional variables:
-
-- `{{ .Header }}`
-- `{{ .Footer }}`
-- `{{ .Inputs }}`
-- `{{ .Modules }}`
-- `{{ .Outputs }}`
-- `{{ .Providers }}`
-- `{{ .Requirements }}`
-- `{{ .Resources }}`
-
-and following functions:
-
-- `{{ include "relative/path/to/file" }}`
-
-These variables are the generated output of individual sections in the selected
-formatter. For example `{{ .Inputs }}` is Markdown Table representation of _inputs_
-when formatter is set to `markdown table`.
-
-Note that sections visibility (i.e. `sections.show` and `sections.hide`) takes
-precedence over the `content`.
-
-Additionally there's also one extra special variable avaialble to the `content`:
-
-- `{{ .Module }}`
-
-As opposed to the other variables mentioned above, which are generated sections
-based on a selected formatter, the `{{ .Module }}` variable is just a `struct`
-representing a [Terraform module].
-
-````yaml
-content: |-
-  Any arbitrary text can be placed anywhere in the content
-
-  {{ .Header }}
-
-  and even in between sections
-
-  {{ .Providers }}
-
-  and they don't even need to be in the default order
-
-  {{ .Outputs }}
-
-  include any relative files
-
-  {{ include "relative/path/to/file" }}
-
-  {{ .Inputs }}
-
-  # Examples
-
-  ```hcl
-  {{ include "examples/foo/main.tf" }}
-  ```
-
-  ## Resources
-
-  {{ range .Module.Resources }}
-  - {{ .GetMode }}.{{ .Spec }} ({{ .Position.Filename }}#{{ .Position.Line }})
-  {{- end }}
-````
-
-## Build on top of terraform-docs
-
-terraform-docs primary use-case is to be utilized as a standalone binary, but
-some parts of it is also available publicly and can be imported in your project
-as a library.
-
-```go
-import (
-    "github.com/terraform-docs/terraform-docs/format"
-    "github.com/terraform-docs/terraform-docs/print"
-    "github.com/terraform-docs/terraform-docs/terraform"
-)
-
-// buildTerraformDocs for module root `path` and provided content `tmpl`.
-func buildTerraformDocs(path string, tmpl string) (string, error) {
-    config := print.DefaultConfig()
-    config.ModuleRoot = path // module root path (can be relative or absolute)
-
-    module, err := terraform.LoadWithOptions(config)
-    if err != nil {
-        return "", err
+module "lambda" {
+  source = "git::git@github.com:tomarv2/terraform-aws-lambda.git"
+
+  # -----------------------------------------
+  # NOTE: One of the below is required:
+  # - existing `role`
+  # - `profile_for_iam` and `policy_identifier` (to handle the case where deployment account does not have permission to manage IAM)
+  role                = "arn:aws:iam::123456789012:role/demo-role"
+  #profile_for_iam    = "iam-team"
+  #policy_identifier  = ["events.amazonaws.com", "cloudwatch.amazonaws.com", "lambda.amazonaws.com"]
+
+  # NOTE: One of the below is required:
+  # - `source_file`
+  # - `source_dir` and/or `exclude_files` and/or `runtime_dependencies`
+  source_file           = "lambda_function.py"
+  #source_dir           = "demo_lambda"
+  #exclude_files        = ["exclude_file.txt"]
+  #runtime_dependencies = false
+  # -----------------------------------------
+  output_path          = "/tmp/test.zip"
+
+  runtime = "python3.8"
+  handler = "lambda_function.lambda_handler"
+  aws_region = "us-west-2"
+  environment = {
+    variables = {
+      HELLO = "WORLD"
     }
-
-    // Generate in Markdown Table format
-    formatter := format.NewMarkdownTable(config)
-
-    if err := formatter.Generate(module); err != nil {
-        return "", err
-    }
-
-    // // Note: if you don't intend to provide additional template for the generated
-    // // content, or the target format doesn't provide templating (e.g. json, yaml,
-    // // xml, or toml) you can use `Content()` function instead of `Render()`.
-    // // `Content()` returns all the sections combined with predefined order.
-    // return formatter.Content(), nil
-
-    return formatter.Render(tmpl)
+  }
+  # -----------------------------------------
+  # Do not change the teamid, prjid once set.
+  teamid = var.teamid
+  prjid  = var.prjid
 }
 ```
 
-## Plugin
-
-Generated output can be heavily customized with [`content`], but if using that
-is not enough for your use-case, you can write your own plugin.
-
-In order to install a plugin the following steps are needed:
-
-- download the plugin and place it in `~/.tfdocs.d/plugins` (or `./.tfdocs.d/plugins`)
-- make sure the plugin file name is `tfdocs-format-<NAME>`
-- modify [`formatter`] of `.terraform-docs.yml` file to be `<NAME>`
-
-**Important notes:**
-
-- if the plugin file name is different than the example above, terraform-docs won't
-be able to to pick it up nor register it properly
-- you can only use plugin thorough `.terraform-docs.yml` file and it cannot be used
-with CLI arguments
-
-To create a new plugin create a new repository called `tfdocs-format-<NAME>` with
-following `main.go`:
-
-```go
-package main
-
-import (
-    _ "embed" //nolint
-
-    "github.com/terraform-docs/terraform-docs/plugin"
-    "github.com/terraform-docs/terraform-docs/print"
-    "github.com/terraform-docs/terraform-docs/template"
-    "github.com/terraform-docs/terraform-docs/terraform"
-)
-
-func main() {
-    plugin.Serve(&plugin.ServeOpts{
-        Name:    "<NAME>",
-        Version: "0.1.0",
-        Printer: printerFunc,
-    })
+### Lambda(with VPC)
+```
+module "global" {
+  source = "git::git@github.com:tomarv2/terraform-global.git//aws"
 }
 
-//go:embed sections.tmpl
-var tplCustom []byte
+module "common" {
+  source = "git::git@github.com:tomarv2/terraform-global.git//common"
+}
 
-// printerFunc the function being executed by the plugin client.
-func printerFunc(config *print.Config, module *terraform.Module) (string, error) {
-    tpl := template.New(config,
-        &template.Item{Name: "custom", Text: string(tplCustom)},
-    )
+module "lambda" {
+  source = "git::git@github.com:tomarv2/terraform-aws-lambda.git"
 
-    rendered, err := tpl.Render("custom", module)
-    if err != nil {
-        return "", err
+  # -----------------------------------------
+  # NOTE: One of the below is required:
+  # - existing `role`
+  # - `profile_for_iam` and `policy_identifier` (to handle the case where deployment account does not have permission to manage IAM)
+  role                  = "arn:aws:iam::123456789012:role/demo-role"
+  #profile_for_iam      = "iam-admin"
+  #policy_identifier    = ["events.amazonaws.com", "cloudwatch.amazonaws.com", "lambda.amazonaws.com"]
+
+  # NOTE: One of the below is required:
+  # - `source_file`
+  # - `source_dir` and/or `exclude_files` and/or `runtime_dependencies`
+  #source_file         = "lambda_function.py"
+  source_dir           = "demo_lambda"
+  exclude_files        = ["exclude_file.txt"]
+  runtime_dependencies = true
+  # -----------------------------------------
+  output_path          = "/tmp/test.zip"
+
+  runtime = "python3.8"
+  handler = "lambda_function.lambda_handler"
+  environment = {
+    variables = {
+      HELLO = "WORLD"
     }
+  }
+  # -----------------------------------------
+  vpc_config = {
+    subnet_ids         = module.global.list_of_subnets["755921336062"]["us-west-2"]
+    security_group_ids = [module.security_group.security_group_id]
+  }
 
-    return rendered, nil
+  # -----------------------------------------
+  # Do not change the teamid, prjid once set.
+  teamid = var.teamid
+  prjid  = var.prjid
+}
+
+module "security_group" {
+  source = "git::git@github.com:tomarv2/terraform-aws-security-group.git"
+
+  security_group_ingress = {
+    default = {
+      description = "https"
+      from_port   = 443
+      protocol    = "tcp"
+      type        = "ingress"
+      to_port     = 443
+      self        = true
+      cidr_blocks = []
+    },
+    ssh = {
+      description = "ssh"
+      from_port   = 22
+      protocol    = "tcp"
+      type        = "ingress"
+      to_port     = 22
+      self        = false
+      cidr_blocks = module.common.cidr_for_sec_grp_access
+    }
+  }
+  #-------------------------------------------
+  # Do not change the teamid, prjid once set.
+  teamid = var.teamid
+  prjid  = var.prjid
 }
 ```
 
-Please refer to [tfdocs-format-template] for more details. You can create a new
-repository from it by clicking on `Use this template` button.
+Please refer to examples directory [link](examples) for references.
 
-## Documentation
 
-- **Users**
-  - Read the [User Guide] to learn how to use terraform-docs
-  - Read the [Formats Guide] to learn about different output formats of terraform-docs
-  - Refer to [Config File Reference] for all the available configuration options
-- **Developers**
-  - Read [Contributing Guide] before submitting a pull request
-
-Visit [our website] for all documentation.
-
-## Community
-
-- Discuss terraform-docs on [Slack]
-
-## License
-
-MIT License - Copyright (c) 2021 The terraform-docs Authors.
-
-[Chocolatey]: https://www.chocolatey.org
-[Config File Reference]: https://terraform-docs.io/user-guide/configuration/
-[`content`]: https://terraform-docs.io/user-guide/configuration/content/
-[Contributing Guide]: CONTRIBUTING.md
-[Formats Guide]: https://terraform-docs.io/reference/terraform-docs/
-[`formatter`]: https://terraform-docs.io/user-guide/configuration/formatter/
-[here]: https://golang.org/doc/code.html#GOPATH
-[Homebrew]: https://brew.sh
-[install pre-commit]: https://pre-commit.com/#install
-[`output`]: https://terraform-docs.io/user-guide/configuration/output/
-[releases]: https://github.com/terraform-docs/terraform-docs/releases
-[Scoop]: https://scoop.sh/
-[Slack]: https://slack.terraform-docs.io/
-[terraform-docs GitHub Action]: https://github.com/terraform-docs/gh-actions
-[Terraform module]: https://pkg.go.dev/github.com/terraform-docs/terraform-docs/terraform#Module
-[tfdocs-format-template]: https://github.com/terraform-docs/tfdocs-format-template
-[our website]: https://terraform-docs.io/
-[User Guide]: https://terraform-docs.io/user-guide/introduction/
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0.6712 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0.1demo |
 | <a name="requirement_archive"></a> [archive](#requirement\_archive) | >= 2.1 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 3.74 |
 | <a name="requirement_external"></a> [external](#requirement\_external) | >= 2.1.0 |
