@@ -116,24 +116,6 @@ jobs:
         run: |
           pre-commit run --color=always --show-diff-on-failure --all-files
 
-      - name: Get current branch name
-        id: vars
-        run: |
-          echo ::set-output name=branch_name::${GITHUB_REF##*/}
-
-#      - name: Commit files
-#        run: |
-#          git config --local user.email "terraform+github-actions[bot]@users.noreply.github.com"
-#          git config --local user.name "github-actions[bot]"
-#          git add -A
-#          git commit -m "Add changes"
-#
-#      - name: Push changes
-#        uses: ad-m/github-push-action@master
-#        with:
-#          github_token: ${{ secrets.GITHUB_TOKEN }}
-#          branch: ${{ github.ref }}
-
       - name: Create Pull Request
         id: create_pr
         uses: peter-evans/create-pull-request@v4
@@ -143,8 +125,6 @@ jobs:
           committer: GitHub <noreply@github.com>
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
           signoff: false
-          delete-branch: false
-          branch: develop
           base: main
           title: '[Automated] pre commit changes'
           body: |
