@@ -116,6 +116,11 @@ jobs:
         run: |
           pre-commit run --color=always --show-diff-on-failure --all-files
 
+      - name: Get current branch name
+        id: vars
+        run: |
+          echo ::set-output name=branch_name::${GITHUB_REF##*/}
+
       - name: Commit files
         run: |
           git add -A .
