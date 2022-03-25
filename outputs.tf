@@ -42,4 +42,3 @@ output "output_dir_size" {
   description = "Output dir path size"
   value       = join("", data.archive_file.zip_dir.*.output_size)
 }
-
