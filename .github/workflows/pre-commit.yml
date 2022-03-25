@@ -121,8 +121,6 @@ jobs:
         run: |
           git config user.name 'Varun Tomar'
           git config user.email 'tomarv2@users.noreply.github.com'
-          date +%s > report.txt
-          git commit -am "Modify tracked file during workflow"
           date +%s > new-report.txt
           git add -A
           git commit -m "Add untracked file during workflow"
