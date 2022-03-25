@@ -131,11 +131,6 @@ jobs:
         run: |
           echo "hello" > demo.txt
           git pull
-#          git add -A .
-#          git config --local user.email "terraform+github-actions[bot]@users.noreply.github.com"
-#          git config --local user.name "github-actions[bot]"
-#          git commit -m "Add changes"
-#          git push
           git diff-index --quiet HEAD || (git commit -A -m'[bot] update files' --allow-empty && git push -f)
 
 #      - name: Execute pre-commit after
