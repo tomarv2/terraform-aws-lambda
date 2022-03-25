@@ -133,11 +133,27 @@ jobs:
         run: |
           echo ::set-output name=branch_name::${GITHUB_REF##*/}
 
-      # Create a pull request from develop to main branch
-      - name: Pull requests to main
+#      # Create a pull request from develop to main branch
+#      - name: Pull requests to main
+#        if: ${{ steps.vars.outputs.branch_name }} == 'develop'
+#        uses: vsoch/pull-request-action@master
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#          PULL_REQUEST_BRANCH: "main"
+#          PULL_REQUEST_FROM_BRANCH: ${{ github.ref }}
+
+      - name: Create Pull Request
         if: ${{ steps.vars.outputs.branch_name }} == 'develop'
-        uses: vsoch/pull-request-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PULL_REQUEST_BRANCH: "main"
-          PULL_REQUEST_FROM_BRANCH: ${{ github.ref }}
+        id: cpr
+        uses: peter-evans/create-pull-request@v4
+        with:
+          commit-message: Auto update
+          committer: GitHub <noreply@github.com>
+          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+          signoff: false
+          base: main
+          title: '[Automated] PR'
+          body: |
+            Auto update from develop branch
+          labels: |
+            automated pr
