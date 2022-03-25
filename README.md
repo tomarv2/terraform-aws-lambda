@@ -211,7 +211,7 @@ Please refer to examples directory [link](examples) for references.
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0.1demo |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0.19 |
 | <a name="requirement_archive"></a> [archive](#requirement\_archive) | >= 2.1 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 3.74 |
 | <a name="requirement_external"></a> [external](#requirement\_external) | >= 2.1.0 |
