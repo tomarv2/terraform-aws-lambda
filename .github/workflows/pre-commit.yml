@@ -114,11 +114,6 @@ jobs:
         #continue-on-error: true
         if: ${{ matrix.version ==  needs.getBaseVersion.outputs.maxVersion }}
         run: |
-          pre-commit run --color=always --show-diff-on-failure --all-files > /dev/null 2>&1
-#
-#      - uses: actions/checkout@v3
-#      - name: Create commits
-#        run: |
           git config user.name 'Varun Tomar'
           git config user.email 'tomarv2@users.noreply.github.com'
           date +%s > new-report.txt
