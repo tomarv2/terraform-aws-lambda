@@ -113,6 +113,20 @@ jobs:
         run: |
           pre-commit run --color=always --show-diff-on-failure --all-files
 
+#      runs-on: ubuntu-latest
+#      steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+
+      - name: Render terraform docs and push changes back to PR
+        uses: terraform-docs/gh-actions@main
+        with:
+          working-dir: .
+          output-file: README.md
+          output-method: inject
+          git-push: "true"
+
       - name: Commit files
         run: |
           git pull
