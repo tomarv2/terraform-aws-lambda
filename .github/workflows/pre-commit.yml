@@ -121,17 +121,18 @@ jobs:
           output-method: inject
           git-push: "true"
 
+      - name: Get current branch name
+        id: vars
+        run: |
+          echo ::set-output name=branch_name::${GITHUB_REF##*/}
+
       - name: Commit modified files
+        if: ${{ steps.vars.outputs.branch_name }} == 'develop'
         run: |
           git pull
           git config --local user.email "terraform+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git diff-index --quiet HEAD || (git add -A && git commit -m'[bot] update files' --allow-empty && git push -f)
-
-      - name: Get current branch name
-        id: vars
-        run: |
-          echo ::set-output name=branch_name::${GITHUB_REF##*/}
 
 #      # Create a pull request from develop to main branch
 #      - name: Pull requests to main
@@ -151,9 +152,9 @@ jobs:
           committer: GitHub <noreply@github.com>
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
           signoff: false
-          branch: main
+          #branch: main
           title: '[Automated] PR'
           body: |
-            Auto update from develop branch
+            Auto update from ${{ steps.vars.outputs.branch_name }} branch
           labels: |
             automated pr
