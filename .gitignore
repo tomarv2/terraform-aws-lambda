@@ -221,3 +221,6 @@ dmypy.json
 *.tar
 *.zip
 *.tz
+
+# Adding README.md (file is auto generated)
+README.md
