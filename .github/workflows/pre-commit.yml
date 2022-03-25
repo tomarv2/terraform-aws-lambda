@@ -151,7 +151,7 @@ jobs:
           committer: GitHub <noreply@github.com>
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
           signoff: false
-          base: main
+          branch: main
           title: '[Automated] PR'
           body: |
             Auto update from develop branch
