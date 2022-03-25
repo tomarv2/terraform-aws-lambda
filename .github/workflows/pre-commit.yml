@@ -152,9 +152,10 @@ jobs:
           committer: GitHub <noreply@github.com>
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
           signoff: false
-          #branch: main
+          branch: main
           title: '[Automated] PR'
           body: |
             Auto update from ${{ steps.vars.outputs.branch_name }} branch
           labels: |
             automated pr
+
