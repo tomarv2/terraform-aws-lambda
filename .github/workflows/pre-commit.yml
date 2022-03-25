@@ -117,7 +117,7 @@ jobs:
           pre-commit run --color=always --show-diff-on-failure --all-files
 
       - name: Execute pre-commit5
-        if: ${{ matrix.version ==  needs.getBaseVersion.outputs.maxVersion }}
+        run: |
           git config user.name 'Varun Tomar'
           git config user.email 'tomarv2@users.noreply.github.com'
           git add -A
