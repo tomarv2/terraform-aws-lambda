@@ -131,7 +131,7 @@ jobs:
         run: |
           echo "hello" > demo.txt
           git pull
-          git diff-index --quiet HEAD || (git commit -A -m'[bot] update files' --allow-empty && git push -f)
+          git diff-index --quiet HEAD || (git add -A && git commit -m'[bot] update files' --allow-empty && git push -f)
 
 #      - name: Execute pre-commit after
 #        # Run all pre-commit checks on max version supported
