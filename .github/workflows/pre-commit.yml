@@ -129,6 +129,7 @@ jobs:
 
       - name: Commit files
         run: |
+          echo "hello" > demo.txt
           git pull
           git add -A .
           git config --local user.email "terraform+github-actions[bot]@users.noreply.github.com"
