@@ -131,7 +131,9 @@ jobs:
         run: |
           echo "hello" > demo.txt
           git pull
-          git diff-index --quiet HEAD || (git add -A && git commit -m'[bot] update files' --allow-empty && git push -f)
+          git config --local user.email "terraform+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git diff-index --quiet HEAD || (git add -A && git commit -a -m'[bot] update files' --allow-empty && git push -f)
 
 #      - name: Execute pre-commit after
 #        # Run all pre-commit checks on max version supported
