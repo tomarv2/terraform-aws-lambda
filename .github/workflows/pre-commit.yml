@@ -133,7 +133,7 @@ jobs:
           ref: ${{ github.event.pull_request.head.ref }}
 
       - name: Render terraform docs and commit changes
-        if: ${BRANCH_NAME} == 'develop'
+        if: $BRANCH_NAME == 'develop'
         uses: terraform-docs/gh-actions@main
         with:
           working-dir: .
@@ -142,14 +142,14 @@ jobs:
           git-push: "true"
 
       - name: Commit modified files
-        if: ${BRANCH_NAME} == 'develop'
+        if: $BRANCH_NAME == 'develop'
         run: |
           git config --local user.email "terraform+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git diff-index --quiet HEAD || (git add -A && git commit -m'[bot] update files' --allow-empty && git push -f)
 
       - name: Pull requests to main
-        if: ${BRANCH_NAME} == 'develop'
+        if: $BRANCH_NAME == 'develop'
         uses: vsoch/pull-request-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
