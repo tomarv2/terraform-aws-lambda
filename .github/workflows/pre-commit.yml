@@ -124,6 +124,7 @@ jobs:
             BRANCH_NAME="${GITHUB_REF##*/}"
           fi
           echo "BRANCH_NAME=${BRANCH_NAME}" >> $GITHUB_ENV
+          echo ${BRANCH_NAME}
 
       - name: "Another step uses branch name"
         run: echo "Branch name is ${{ env.BRANCH_NAME }}"
