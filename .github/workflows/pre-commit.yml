@@ -131,7 +131,7 @@ jobs:
         run: |
           git config --local user.email "terraform+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git diff-index --quiet HEAD || (git add -A && git commit -m'[bot] update files' --allow-empty && git push -f)
+          git add -A && git commit -m'[bot] update files' --allow-empty && git push
 
 #      # Create a pull request from develop to main branch
 #      - name: Pull requests to main
@@ -157,4 +157,8 @@ jobs:
             Auto update from ${{ steps.vars.outputs.branch_name }} branch
           labels: |
             automated pr
+
+
+
+
 
