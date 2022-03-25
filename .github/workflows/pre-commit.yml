@@ -111,13 +111,15 @@ jobs:
 
       - name: Execute pre-commit
         # Run all pre-commit checks on max version supported
-        #continue-on-error: true
+        continue-on-error: true
         if: ${{ matrix.version ==  needs.getBaseVersion.outputs.maxVersion }}
         run: |
-          pre-commit run --color=always --show-diff-on-failure --all-files > /dev/null 2>&1
+          pre-commit run --color=always --show-diff-on-failure --all-files
+
+      - name: Execute pre-commit5
+        if: ${{ matrix.version ==  needs.getBaseVersion.outputs.maxVersion }}
           git config user.name 'Varun Tomar'
           git config user.email 'tomarv2@users.noreply.github.com'
-          date +%s > new-report.txt
           git add -A
           git commit -m "Add untracked file during workflow"
           git push
