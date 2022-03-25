@@ -107,7 +107,7 @@ jobs:
           pip install checkov
           curl -L "$(curl -s https://api.github.com/repos/terraform-linters/tflint/releases/latest | grep -o -E "https://.+?_linux_amd64.zip")" > tflint.zip && unzip tflint.zip && rm tflint.zip && sudo mv tflint /usr/bin/
 
-      - name: Execute pre-commit
+      - name: Execute pre-commit before
         # Run all pre-commit checks on max version supported
         continue-on-error: true
         run: |
@@ -121,5 +121,8 @@ jobs:
           git commit -m "Add changes"
           git push
 
-
+      - name: Execute pre-commit after
+        # Run all pre-commit checks on max version supported
+        run: |
+          pre-commit run --color=always --show-diff-on-failure --all-files
 
