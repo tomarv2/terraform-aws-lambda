@@ -1,10 +1,7 @@
 name: "Mark or close stale issues and PRs"
 on:
-#  schedule:
-#  - cron: "0 0 * * *"
-#  push:
-#    branches:
-#      - main
+  schedule:
+  - cron: "0 0 10 * *"
 
 jobs:
   stale:

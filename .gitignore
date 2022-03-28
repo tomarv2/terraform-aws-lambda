@@ -210,17 +210,3 @@ dmypy.json
 
 # remote_backend.tf file
 **/remote_backend.tf
-
-# Packages #
-*.7z
-*.dmg
-*.gz
-*.iso
-*.jar
-*.rar
-*.tar
-*.zip
-*.tz
-
-# Adding README.md (file is auto generated)
-README.md

@@ -5,6 +5,7 @@ on:
   push:
     branches:
       - develop
+      - main
 
 jobs:
   getDirectories:
@@ -113,12 +114,23 @@ jobs:
         run: |
           echo ::set-output name=branch_name::${GITHUB_REF##*/}
 
+      - name: "Get branch name and save to env"
+        env:
+          IS_PR: ${{ github.EVENT_NAME == 'pull_request' }}
+        run: |
+          if ${IS_PR}; then
+            BRANCH_NAME="${GITHUB_HEAD_REF}"
+          else
+            BRANCH_NAME="${GITHUB_REF##*/}"
+          fi
+          echo "BRANCH_NAME=${BRANCH_NAME}" >> $GITHUB_ENV
+
       - uses: actions/checkout@v2
         with:
           ref: ${{ github.event.pull_request.head.ref }}
 
       - name: Render terraform docs and commit changes
-        if: ${{ steps.vars.outputs.branch_name }} == 'develop'
+        if: ${{ env.BRANCH_NAME }}  == 'develop'
         uses: terraform-docs/gh-actions@main
         with:
           working-dir: .
@@ -126,39 +138,23 @@ jobs:
           output-method: inject
           git-push: "true"
 
-      - name: Commit modified files
-        if: ${{ steps.vars.outputs.branch_name }} == 'develop'
+      - name: Commit pre-commit modified files
+        if: ${{ env.BRANCH_NAME }} == 'develop'
         run: |
           git config --local user.email "terraform+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add -A && git commit -m'[bot] update files' --allow-empty && git push
+          git diff-index --quiet HEAD || (git add -A && git commit -m'[bot] update files' --allow-empty && git push -f)
 
-#      # Create a pull request from develop to main branch
-#      - name: Pull requests to main
-#        if: ${{ steps.vars.outputs.branch_name }} == 'develop'
-#        uses: vsoch/pull-request-action@master
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#          PULL_REQUEST_BRANCH: "main"
-#          PULL_REQUEST_FROM_BRANCH: ${{ github.ref }}
-
-      - name: Create Pull Request
-        if: ${{ steps.vars.outputs.branch_name }} == 'develop'
-        id: cpr
-        uses: peter-evans/create-pull-request@v4
+      - uses: actions/checkout@v2
+      - name: Create PR
+        continue-on-error: true
+        uses: repo-sync/pull-request@v2
+        if: ${{ env.BRANCH_NAME }}  == 'develop'
         with:
-          commit-message: Auto update
-          committer: GitHub <noreply@github.com>
-          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
-          signoff: false
-          branch: main
-          title: '[Automated] PR'
-          body: |
-            Auto update from ${{ steps.vars.outputs.branch_name }} branch
-          labels: |
-            automated pr
-
-
-
-
-
+          source_branch: "develop"
+          destination_branch: "main"
+          pr_title: "Pulling ${{ github.ref }} into main"
+          pr_body: ":crown: *Automated PR*"
+          pr_label: "auto-pr"
+          pr_allow_empty: false
+          github_token: ${{ secrets.GITHUB_TOKEN }}
