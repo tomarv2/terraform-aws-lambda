@@ -5,7 +5,7 @@ on:
   push:
     branches:
       - develop
-      - maain
+      - main
 
 jobs:
   getDirectories:
@@ -125,9 +125,6 @@ jobs:
           fi
           echo "BRANCH_NAME=${BRANCH_NAME}" >> $GITHUB_ENV
 
-      - name: "Another step uses branch name"
-        run: echo "Branch name is ${{ env.BRANCH_NAME }}"
-        
       - uses: actions/checkout@v2
         with:
           ref: ${{ github.event.pull_request.head.ref }}
@@ -141,7 +138,7 @@ jobs:
           output-method: inject
           git-push: "true"
 
-      - name: Commit modified files
+      - name: Commit pre-commit modified files
         if: ${{ env.BRANCH_NAME }} == 'develop'
         run: |
           git config --local user.email "terraform+github-actions[bot]@users.noreply.github.com"
@@ -149,7 +146,8 @@ jobs:
           git diff-index --quiet HEAD || (git add -A && git commit -m'[bot] update files' --allow-empty && git push -f)
 
       - uses: actions/checkout@v2
-      - name: pull-request
+      - name: Create PR
+        continue-on-error: true # To avoid pre-commit failure
         uses: repo-sync/pull-request@v2
         if: ${{ env.BRANCH_NAME }}  == 'develop'
         with:
@@ -160,4 +158,3 @@ jobs:
           pr_label: "auto-pr"
           pr_allow_empty: false
           github_token: ${{ secrets.GITHUB_TOKEN }}
-
