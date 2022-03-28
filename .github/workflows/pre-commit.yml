@@ -147,7 +147,7 @@ jobs:
 
       - uses: actions/checkout@v2
       - name: Create PR
-        continue-on-error: true # To avoid pre-commit failure
+        continue-on-error: true
         uses: repo-sync/pull-request@v2
         if: ${{ env.BRANCH_NAME }}  == 'develop'
         with:
