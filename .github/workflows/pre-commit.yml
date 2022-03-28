@@ -155,5 +155,5 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PULL_REQUEST_BRANCH: "main"
           PULL_REQUEST_FROM_BRANCH: ${{ github.ref }}
-          BRANCH_NAME = ${{ env.BRANCH_NAME }}
+          BRANCH_NAME: ${{ env.BRANCH_NAME }}
 
