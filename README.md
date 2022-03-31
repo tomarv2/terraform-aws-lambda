@@ -38,7 +38,7 @@ terraform destroy -var='teamid=tryme' -var='prjid=project1'
 
 #### Option 2:
 
-##### Recommended method (stores remote state in S3 using `prjid` and `teamid` to create directory structure):
+##### Recommended method (stores remote state in remote backend(S3,  Azure storage, or Google bucket) using `prjid` and `teamid` to create directory structure):
 
 - Create python 3.8+ virtual environment
 ```
@@ -164,7 +164,7 @@ module "lambda" {
   }
   # -----------------------------------------
   vpc_config = {
-    subnet_ids         = module.global.list_of_subnets["755921336062"]["us-west-2"]
+    subnet_ids         = module.global.list_of_subnets["123456789012"]["us-west-2"]
     security_group_ids = [module.security_group.security_group_id]
   }
 
