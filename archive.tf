@@ -1,18 +1,14 @@
-data "archive_file" "zip_file" {
-  count = var.source_file != null ? 1 : 0
-
-  type        = var.archive_type
-  source_file = var.source_file
-  output_path = var.output_path
-}
-
-data "archive_file" "zip_dir" {
-  count = var.source_dir != null ? 1 : 0
-
-  type        = var.archive_type
-  source_dir  = var.runtime_dependencies == true ? "/tmp/lambda_dist_pkg/" : var.source_dir
-  output_path = var.output_path
-  excludes    = var.exclude_files
+data "archive_file" "zip" {
+  for_each = {
+    for key, value in var.lambda_config :
+    key => value
+    if try(value.source_file, value.source_dir) != null
+  }
+  type        = try(each.value.archive_type, "zip")
+  source_file = try(each.value.source_file, null)
+  source_dir  = try(each.value.runtime_dependencies, null) == true ? "/tmp/lambda_dist_pkg/" : try(each.value.source_dir, null)
+  output_path = try(each.value.output_path, null)
+  excludes    = try(each.value.exclude_files, null)
 
   depends_on = [data.external.install_python_dependencies]
 }
