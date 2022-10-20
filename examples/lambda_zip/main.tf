@@ -16,11 +16,14 @@ module "lambda" {
 
   lambda_config = {
     "demo_lambda" = {
-      role        = var.role_arn
-      source_file = "lambda_function.py"
-      output_path = "/tmp/test.zip"
-      runtime     = "python3.8"
-      handler     = "lambda_function.lambda_handler"
+      role                 = var.role_arn
+      source_dir           = "demo_lambda"
+      exclude_files        = ["exclude_file.txt"]
+      runtime_dependencies = false
+      output_path          = "/tmp/test.zip"
+
+      runtime = "python3.8"
+      handler = "lambda_function.lambda_handler"
       environment = {
         variables = {
           HELLO = "WORLD"

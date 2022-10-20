@@ -1,6 +1,9 @@
 data "external" "install_python_dependencies" {
-  count = var.runtime_dependencies ? 1 : 0
+  for_each = {
+    for key, value in var.lambda_config :
+    key => value
+    if lookup(value, "runtime_dependencies", null) != null
+  }
 
-  program = ["python", "${path.module}/install_dependencies.py", path.cwd, var.source_dir]
-
+  program = ["python", "${path.module}/install_dependencies.py", path.cwd, each.value.source_dir]
 }

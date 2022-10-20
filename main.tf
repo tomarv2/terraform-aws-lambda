@@ -1,39 +1,39 @@
 resource "aws_lambda_function" "lambda" {
-  count = var.deploy_lambda && !var.deploy_layer ? 1 : 0
+  for_each = var.lambda_config != null ? var.lambda_config : {}
 
-  function_name                  = var.name != null ? var.name : "${var.teamid}-${var.prjid}"
-  description                    = var.description == "" ? "Terraform managed : ${var.teamid}-${var.prjid}" : var.description
-  filename                       = var.source_file != null ? join("", data.archive_file.zip_file.*.output_path) : join("", data.archive_file.zip_dir.*.output_path)
-  source_code_hash               = var.source_file != null ? join("", data.archive_file.zip_file.*.output_base64sha256) : join("", data.archive_file.zip_dir.*.output_base64sha256)
-  role                           = var.role == null ? module.iam_role.iam_role_arn : var.role
-  handler                        = var.package_type != "Zip" ? null : var.handler
-  reserved_concurrent_executions = var.reserved_concurrent_executions
-  runtime                        = var.package_type != "Zip" ? null : var.runtime
-  memory_size                    = var.memory_size == "" ? "null" : var.memory_size
-  timeout                        = var.timeout == "" ? "null" : var.timeout
-  layers                         = var.layers
-  kms_key_arn                    = var.kms_key_arn
-  image_uri                      = var.image_uri
-  package_type                   = var.package_type
+  function_name                  = each.key
+  description                    = try(each.value.description, "Terraform managed : ${var.teamid}-${var.prjid}")
+  filename                       = each.value.output_path
+  source_code_hash               = join("", [for sha in data.archive_file.zip : sha.output_base64sha256])
+  role                           = each.value.role
+  handler                        = each.value.handler
+  reserved_concurrent_executions = try(each.value.reserved_concurrent_executions, null)
+  runtime                        = try(each.value.runtime, null)
+  memory_size                    = try(each.value.memory_size, 128)
+  timeout                        = try(each.value.timeout, 30)
+  layers                         = try(each.value.layers, null)
+  kms_key_arn                    = try(each.value.kms_key_arn, null)
+  image_uri                      = try(each.value.image_uri, null)
+  package_type                   = try(each.value.package_type, "Zip")
 
   tags = merge(local.shared_tags)
 
   dynamic "environment" {
-    for_each = var.environment == null ? [] : [var.environment]
+    for_each = try(each.value.environment, null) == null ? [] : [each.value.environment]
     content {
       variables = environment.value.variables
     }
   }
 
   dynamic "tracing_config" {
-    for_each = var.tracing_config == null ? [] : [var.tracing_config]
+    for_each = try(each.value.tracing_config, null) == null ? [] : [each.value.tracing_config]
     content {
       mode = tracing_config.value.mode
     }
   }
 
   dynamic "vpc_config" {
-    for_each = var.vpc_config == null ? [] : [var.vpc_config]
+    for_each = try(each.value.vpc_config, null) == null ? [] : [each.value.vpc_config]
     content {
       security_group_ids = vpc_config.value.security_group_ids
       subnet_ids         = vpc_config.value.subnet_ids
@@ -41,17 +41,17 @@ resource "aws_lambda_function" "lambda" {
   }
 
   dynamic "dead_letter_config" {
-    for_each = var.dead_letter_config == null ? [] : [var.dead_letter_config]
+    for_each = try(each.value.dead_letter_config, null) == null ? [] : [each.value.dead_letter_config]
     content {
       target_arn = dead_letter_config.value.target_arn
     }
   }
 
   dynamic "file_system_config" {
-    for_each = var.file_system_arn != null && var.file_system_local_mount_path != null ? [true] : []
+    for_each = try(each.value.file_system_arn, null) != null && try(each.value.file_system_local_mount_path, null) != null ? [true] : []
     content {
-      local_mount_path = var.file_system_local_mount_path
-      arn              = var.file_system_arn
+      local_mount_path = try(each.value.file_system_local_mount_path, null)
+      arn              = try(each.value.file_system_arn, null)
     }
   }
 }

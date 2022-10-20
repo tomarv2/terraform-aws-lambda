@@ -25,7 +25,7 @@ repos:
       - id: check-yaml
 
   - repo: https://github.com/bridgecrewio/checkov.git
-    rev: '2.0.914'
+    rev: '2.1.226'
     hooks:
     - id: checkov
       verbose: true
