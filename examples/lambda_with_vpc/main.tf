@@ -22,37 +22,24 @@ module "common" {
 module "lambda" {
   source = "../../"
 
-  # --------------------------------------------------
-  # NOTE: One of the below is required:
-  # - existing `role`
-  # - `profile_for_iam` and `policy_identifier` (to handle the case where deployment account does not have permission to manage IAM)
-  role = "arn:aws:iam::123456789012:role/demo-role"
-  #profile_for_iam    = "iam-admin"
-  #policy_identifier  = ["events.amazonaws.com", "cloudwatch.amazonaws.com", "lambda.amazonaws.com"]
-
-  # NOTE: One of the below is required:
-  # - `source_file`
-  # - `source_dir` and/or `exclude_files` and/or `runtime_dependencies`
-  #source_file         = "lambda_function.py"
-  source_dir           = "demo_lambda"
-  exclude_files        = ["exclude_file.txt"]
-  runtime_dependencies = true
-  # --------------------------------------------------
-  output_path = "/tmp/test.zip"
-
-  runtime = "python3.8"
-  handler = "lambda_function.lambda_handler"
-  environment = {
-    variables = {
-      HELLO = "WORLD"
+  lambda_config = {
+    "demo_lambda" = {
+      role        = var.role_arn
+      source_file = "lambda_function.py"
+      output_path = "/tmp/test.zip"
+      runtime     = "python3.8"
+      handler     = "lambda_function.lambda_handler"
+      environment = {
+        variables = {
+          HELLO = "WORLD"
+        }
+      }
+      vpc_config = {
+        subnet_ids         = module.global.list_of_subnets["123456789012"]["us-west-2"]
+        security_group_ids = [module.security_group.security_group_id]
+      }
     }
   }
-  # -----------------------------------------
-  vpc_config = {
-    subnet_ids         = module.global.list_of_subnets["123456789012"]["us-west-2"]
-    security_group_ids = [module.security_group.security_group_id]
-  }
-
   # -----------------------------------------
   # Do not change the teamid, prjid once set.
   teamid = var.teamid

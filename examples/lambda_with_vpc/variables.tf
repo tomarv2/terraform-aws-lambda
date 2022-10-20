@@ -15,3 +15,8 @@ variable "region" {
   default     = "us-west-2"
   type        = string
 }
+
+variable "role_arn" {
+  description = "Lambda role"
+  default     = "arn:aws:iam::123456789012:role/demo-role"
+}
