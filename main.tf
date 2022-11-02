@@ -1,5 +1,5 @@
 resource "aws_lambda_function" "lambda" {
-  for_each = var.lambda_config != null ? var.lambda_config : {}
+  for_each = var.config != null ? var.config : {}
 
   function_name                  = each.key
   description                    = try(each.value.description, "Terraform managed : ${var.teamid}-${var.prjid}")
@@ -16,7 +16,7 @@ resource "aws_lambda_function" "lambda" {
   image_uri                      = try(each.value.image_uri, null)
   package_type                   = try(each.value.package_type, "Zip")
 
-  tags = merge(local.shared_tags)
+  tags = merge(local.shared_tags, var.extra_tags)
 
   dynamic "environment" {
     for_each = try(each.value.environment, null) == null ? [] : [each.value.environment]

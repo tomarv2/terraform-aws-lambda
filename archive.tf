@@ -1,6 +1,6 @@
 data "archive_file" "zip" {
   for_each = {
-    for key, value in var.lambda_config :
+    for key, value in var.config :
     key => value
     if try(value.source_file, value.source_dir) != null
   }
