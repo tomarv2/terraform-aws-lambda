@@ -22,7 +22,7 @@ module "common" {
 module "lambda" {
   source = "../../"
 
-  lambda_config = {
+  config = {
     "demo_lambda" = {
       role        = var.role_arn
       source_file = "lambda_function.py"
@@ -69,8 +69,5 @@ module "security_group" {
       cidr_blocks = module.common.cidr_for_sec_grp_access
     }
   }
-  #-------------------------------------------
-  # Do not change the teamid, prjid once set.
-  teamid = var.teamid
-  prjid  = var.prjid
+
 }

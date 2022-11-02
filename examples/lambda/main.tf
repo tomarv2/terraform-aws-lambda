@@ -14,7 +14,7 @@ provider "aws" {
 module "lambda" {
   source = "../../"
 
-  lambda_config = {
+  config = {
     "demo_lambda" = {
       role        = var.role_arn
       source_file = "lambda_function.py"
@@ -33,7 +33,7 @@ module "lambda" {
 }
 
 module "cloudwatch" {
-  source = "../../../terraform-aws-cloudwatch"
+  source = "git::git@github.com:tomarv2/terraform-aws-cloudwatch.git"
 
   cloudwatch_config = {
     "/aws/lambda/${module.lambda.function_name}" = {
@@ -45,7 +45,7 @@ module "cloudwatch" {
 }
 
 module "cloudwatch_event" {
-  source = "../../../terraform-aws-cloudwatch-events"
+  source = "git::git@github.com:tomarv2/terraform-aws-cloudwatch-events.git"
 
   cloudwatch_event_config = {
     (module.lambda.function_name) = {

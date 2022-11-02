@@ -1,6 +1,6 @@
 data "external" "install_python_dependencies" {
   for_each = {
-    for key, value in var.lambda_config :
+    for key, value in var.config :
     key => value
     if lookup(value, "runtime_dependencies", null) != null
   }
