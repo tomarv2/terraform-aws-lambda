@@ -2,7 +2,7 @@ terraform {
   required_version = ">= 1.0.1"
   required_providers {
     aws = {
-      version = "~> 4.35"
+      version = "~> 4.61"
     }
   }
 }
@@ -12,11 +12,11 @@ provider "aws" {
 }
 
 module "global" {
-  source = "git::git@github.com:tomarv2/terraform-global.git//aws?ref=v0.0.1"
+  source = "github.com/tomarv2/terraform-global.git//aws?ref=v0.0.1"
 }
 
 module "common" {
-  source = "git::git@github.com:tomarv2/terraform-global.git//common?ref=v0.0.1"
+  source = "github.com/tomarv2/terraform-global.git//common?ref=v0.0.1"
 }
 
 module "lambda" {
@@ -47,7 +47,7 @@ module "lambda" {
 }
 
 module "security_group" {
-  source = "git::git@github.com:tomarv2/terraform-aws-security-group.git?ref=v0.0.9"
+  source = "github.com/tomarv2/terraform-aws-security-group.git?ref=v0.0.9"
 
   security_group_ingress = {
     default = {
