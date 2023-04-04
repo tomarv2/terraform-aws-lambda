@@ -9,8 +9,8 @@
         <img src="https://img.shields.io/github/commit-activity/m/tomarv2/terraform-aws-lambda" /></a>
     <a href="https://stackoverflow.com/users/6679867/tomarv2" alt="Stack Exchange reputation">
         <img src="https://img.shields.io/stackexchange/stackoverflow/r/6679867"></a>
-    <a href="https://twitter.com/intent/follow?screen_name=varuntomar2019" alt="follow on Twitter">
-        <img src="https://img.shields.io/twitter/follow/varuntomar2019?style=social&logo=twitter"></a>
+    <a href="https://twitter.com/intent/follow?screen_name=tomar_v2" alt="follow on Twitter">
+        <img src="https://img.shields.io/twitter/follow/tomar_v2?style=social&logo=twitter"></a>
 </p>
 
 ## Terraform module for [AWS Lambda](https://registry.terraform.io/modules/tomarv2/lambda/aws/latest)
@@ -95,7 +95,7 @@ Please refer to examples directory [link](examples) for references.
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0.1 |
 | <a name="requirement_archive"></a> [archive](#requirement\_archive) | >= 2.1 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 4.35 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 4.61 |
 | <a name="requirement_external"></a> [external](#requirement\_external) | >= 2.1.0 |
 | <a name="requirement_null"></a> [null](#requirement\_null) | >= 3.1.0 |
 
@@ -104,7 +104,7 @@ Please refer to examples directory [link](examples) for references.
 | Name | Version |
 |------|---------|
 | <a name="provider_archive"></a> [archive](#provider\_archive) | >= 2.1 |
-| <a name="provider_aws"></a> [aws](#provider\_aws) | ~> 4.35 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | ~> 4.61 |
 | <a name="provider_external"></a> [external](#provider\_external) | >= 2.1.0 |
 
 ## Modules

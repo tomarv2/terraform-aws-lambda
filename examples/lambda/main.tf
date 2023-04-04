@@ -2,7 +2,7 @@ terraform {
   required_version = ">= 1.0.1"
   required_providers {
     aws = {
-      version = "~> 4.35"
+      version = "~> 4.61"
     }
   }
 }
@@ -33,7 +33,7 @@ module "lambda" {
 }
 
 module "cloudwatch" {
-  source = "git::git@github.com:tomarv2/terraform-aws-cloudwatch.git"
+  source = "github.com/tomarv2/terraform-aws-cloudwatch.git"
 
   cloudwatch_config = {
     "/aws/lambda/${module.lambda.function_name}" = {
@@ -45,7 +45,7 @@ module "cloudwatch" {
 }
 
 module "cloudwatch_event" {
-  source = "git::git@github.com:tomarv2/terraform-aws-cloudwatch-events.git"
+  source = "github.com/tomarv2/terraform-aws-cloudwatch-events.git"
 
   cloudwatch_event_config = {
     (module.lambda.function_name) = {

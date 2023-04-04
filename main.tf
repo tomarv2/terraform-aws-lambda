@@ -1,5 +1,5 @@
 resource "aws_lambda_function" "lambda" {
-  for_each = var.config != null ? var.config : {}
+  for_each = var.config
 
   function_name                  = each.key
   description                    = try(each.value.description, "Terraform managed : ${var.teamid}-${var.prjid}")
