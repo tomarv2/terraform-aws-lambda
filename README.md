@@ -91,11 +91,21 @@ Please refer to examples directory [link](examples) for references.
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
-No requirements.
+| Name | Version |
+|------|---------|
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0.1 |
+| <a name="requirement_archive"></a> [archive](#requirement\_archive) | >= 2.1 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 4.61 |
+| <a name="requirement_external"></a> [external](#requirement\_external) | >= 2.1.0 |
+| <a name="requirement_null"></a> [null](#requirement\_null) | >= 3.1.0 |
 
 ## Providers
 
-No providers.
+| Name | Version |
+|------|---------|
+| <a name="provider_archive"></a> [archive](#provider\_archive) | >= 2.1 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | ~> 4.61 |
+| <a name="provider_external"></a> [external](#provider\_external) | >= 2.1.0 |
 
 ## Modules
 
@@ -103,13 +113,27 @@ No modules.
 
 ## Resources
 
-No resources.
+| Name | Type |
+|------|------|
+| [aws_lambda_function.lambda](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_function) | resource |
+| [archive_file.zip](https://registry.terraform.io/providers/hashicorp/archive/latest/docs/data-sources/file) | data source |
+| [external_external.install_python_dependencies](https://registry.terraform.io/providers/hashicorp/external/latest/docs/data-sources/external) | data source |
 
 ## Inputs
 
-No inputs.
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| <a name="input_config"></a> [config](#input\_config) | Lambda configuration | `map(any)` | `{}` | no |
+| <a name="input_extra_tags"></a> [extra\_tags](#input\_extra\_tags) | Additional tags to associate | `map(string)` | `{}` | no |
 
 ## Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_arn"></a> [arn](#output\_arn) | ARN of the Lambda function |
+| <a name="output_function_name"></a> [function\_name](#output\_function\_name) | Name of the Lambda function |
+| <a name="output_output_path"></a> [output\_path](#output\_output\_path) | Output file path location |
+| <a name="output_output_size"></a> [output\_size](#output\_output\_size) | Output file size |
+| <a name="output_source_dir"></a> [source\_dir](#output\_source\_dir) | Source code location |
+| <a name="output_source_file"></a> [source\_file](#output\_source\_file) | Lambda source code location |
 <!-- END_TF_DOCS -->
